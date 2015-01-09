@@ -2,6 +2,6 @@
 
 Université de Sherbrooke
 
-Session 2
+Session 2 Génie Élec et Info
 
 Groupe de Projet P4
