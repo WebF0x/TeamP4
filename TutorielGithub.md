@@ -13,7 +13,7 @@ Utilisation GitHub for Windows
 
 Utilisation git en console
 ------------------------------
-- Faire clic gauche dans le repo (où le fichier ".git" se trouve)
+- Faire clic droit dans le repo (où le fichier ".git" se trouve)
 - Git Bash
 - Cloner un repo existant avec "git clone [SOURCE] [DESTINATION]"
   - ex: "git clone git@github.com:WebF0x/TeamP4.git" (DESTINATION optionelle)
