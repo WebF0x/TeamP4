@@ -11,6 +11,7 @@
 #include <QLabel>
 #include <QStatusBar>
 #include <QMenuBar>
+#include <QMessageBox>
 
 class VoiceStickUI : public QMainWindow
 {
@@ -21,7 +22,26 @@ public:
     ~VoiceStickUI();
 
 protected slots:
-
+    //Default message
+    void comingSoonInfoPopup();
+    //Menu actions
+    virtual void open();
+    virtual void save();
+    virtual void saveAs();
+    virtual void exit();
+    virtual void undo();
+    virtual void redo();
+    virtual void undoAll();
+    virtual void newProfile();
+    virtual void deleteProfile();
+    virtual void deleteAllProfiles();
+    virtual void userManual();
+    virtual void aboutVoiceStick();
+    virtual void aboutQt();
+    //Buttons
+    virtual void currentProfileChanged(int profile);
+    virtual void test();
+    virtual void run();
 
 private:
     //Widgets
