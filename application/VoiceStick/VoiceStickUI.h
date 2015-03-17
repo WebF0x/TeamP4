@@ -20,7 +20,10 @@ public:
     VoiceStickUI(QWidget *parent, const QString& phonemA, const QString& phonemB, const QString& phonemC, const QString& phonemD);
     ~VoiceStickUI();
 
-protected:
+protected slots:
+
+
+private:
     //Widgets
     QMenuBar* m_menuBar;
         QMenu* m_fileMenu;
