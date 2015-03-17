@@ -1,10 +1,10 @@
-#include "voicestick.h"
+#include "VoiceStickUI.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    VoiceStick w;
+    VoiceStickUI w;
     w.show();
 
     return a.exec();

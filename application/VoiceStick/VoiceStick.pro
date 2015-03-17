@@ -12,7 +12,8 @@ TARGET = VoiceStick
 TEMPLATE = app
 
 
-SOURCES += main.cpp\
-        voicestick.cpp
+SOURCES += main.cpp \
+    VoiceStickUI.cpp
 
-HEADERS  += voicestick.h
+HEADERS  += \
+    VoiceStickUI.h

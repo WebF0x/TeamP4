@@ -3,13 +3,13 @@
 
 #include <QMainWindow>
 
-class VoiceStick : public QMainWindow
+class VoiceStickUI : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    VoiceStick(QWidget *parent = 0);
-    ~VoiceStick();
+    VoiceStickUI(QWidget *parent = 0);
+    ~VoiceStickUI();
 };
 
 #endif // VOICESTICK_H
