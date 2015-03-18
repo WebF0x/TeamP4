@@ -31,9 +31,7 @@ public:
     //n: index on the phonem between 0 and (numberOfPhonems - 1)
     QKeySequence getPhonemKeySequence(int n);
 
-protected slots:
-    //Default message
-    void comingSoonInfoPopup();
+public slots:
     //Menu actions
     virtual void open();
     virtual void save();
@@ -53,6 +51,9 @@ protected slots:
     virtual void run();
 
 private:
+    //Default message
+    void comingSoonInfoPopup();
+
     //Widgets
     QMenuBar* m_menuBar;
         QMenu* m_fileMenu;
@@ -90,9 +91,6 @@ private:
     QVBoxLayout* m_mainVBoxLayout;
         QHBoxLayout* m_profileHBoxLayout;
         QFormLayout* m_phonemsFormLayout;
-
-
-
 };
 
 #endif // VOICESTICK_H
