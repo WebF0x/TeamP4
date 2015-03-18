@@ -13,13 +13,14 @@
 #include <QMenuBar>
 #include <QMessageBox>
 #include <QKeySequenceEdit>
+#include <QStringList>
 
 class VoiceStickUI : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    VoiceStickUI(QWidget *parent, const QString& phonemA, const QString& phonemB, const QString& phonemC, const QString& phonemD);
+    VoiceStickUI(const QStringList& phonemNames, QWidget *parent = 0);
     ~VoiceStickUI();
 
     //Returns the index of the profile in the combo box
@@ -74,14 +75,8 @@ private:
             QPushButton* m_newProfileButton;
             QPushButton* m_deleteProfileButton;
         QGroupBox* m_phonemsGroupBox;
-            QLabel* m_phonemsLabelA;
-            QLabel* m_phonemsLabelB;
-            QLabel* m_phonemsLabelC;
-            QLabel* m_phonemsLabelD;
-            QKeySequenceEdit* m_phonemsAKeyEdit;
-            QKeySequenceEdit* m_phonemsBKeyEdit;
-            QKeySequenceEdit* m_phonemsCKeyEdit;
-            QKeySequenceEdit* m_phonemsDKeyEdit;
+            QList<QLabel*> m_phonemLabels;
+            QList<QKeySequenceEdit*> m_phonemEdits;
         QPushButton* m_testPushButton;
         QPushButton* m_runPushButton;
 

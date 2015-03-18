@@ -1,7 +1,6 @@
 #include "VoiceStickUI.h"
 
-VoiceStickUI::VoiceStickUI(QWidget *parent,
-                           const QString& phonemA, const QString& phonemB, const QString& phonemC, const QString& phonemD)
+VoiceStickUI::VoiceStickUI(const QStringList& phonemNames, QWidget *parent)
     : QMainWindow(parent)
 {
     //Init widgets
@@ -30,14 +29,11 @@ VoiceStickUI::VoiceStickUI(QWidget *parent,
             m_newProfileButton = new QPushButton("New...",this);
             m_deleteProfileButton = new QPushButton("Delete...",this);
         m_phonemsGroupBox = new QGroupBox("Phonems",this);
-            m_phonemsLabelA = new QLabel(phonemA,this);
-            m_phonemsLabelB = new QLabel(phonemB,this);
-            m_phonemsLabelC = new QLabel(phonemC,this);
-            m_phonemsLabelD = new QLabel(phonemD,this);
-            m_phonemsAKeyEdit = new QKeySequenceEdit(this);
-            m_phonemsBKeyEdit = new QKeySequenceEdit(this);
-            m_phonemsCKeyEdit = new QKeySequenceEdit(this);
-            m_phonemsDKeyEdit = new QKeySequenceEdit(this);
+            for(int i=0; i<phonemNames.size(); ++i)
+            {
+                m_phonemLabels.append(new QLabel(phonemNames.at(i),this));
+                m_phonemEdits.append(new QKeySequenceEdit(this));
+            }
         m_testPushButton = new QPushButton("Test",this);
         m_runPushButton = new QPushButton("Run",this);
     m_statusBar = new QStatusBar(this);
@@ -81,10 +77,10 @@ VoiceStickUI::VoiceStickUI(QWidget *parent,
     m_profileHBoxLayout->addWidget(m_newProfileButton);
     m_profileHBoxLayout->addWidget(m_deleteProfileButton);
 
-    m_phonemsFormLayout->addRow(m_phonemsLabelA, m_phonemsAKeyEdit);
-    m_phonemsFormLayout->addRow(m_phonemsLabelB, m_phonemsBKeyEdit);
-    m_phonemsFormLayout->addRow(m_phonemsLabelC, m_phonemsCKeyEdit);
-    m_phonemsFormLayout->addRow(m_phonemsLabelD, m_phonemsDKeyEdit);
+    for(int i=0; i<phonemNames.size(); ++i)
+    {
+        m_phonemsFormLayout->addRow(m_phonemLabels.at(i), m_phonemEdits.at(i));
+    }
 
     //Arrange main window
     setMenuBar(m_menuBar);
