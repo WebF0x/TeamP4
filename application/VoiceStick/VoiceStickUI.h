@@ -12,6 +12,7 @@
 #include <QStatusBar>
 #include <QMenuBar>
 #include <QMessageBox>
+#include <QKeySequenceEdit>
 
 class VoiceStickUI : public QMainWindow
 {
@@ -39,7 +40,6 @@ protected slots:
     virtual void aboutVoiceStick();
     virtual void aboutQt();
     //Buttons
-    virtual void currentProfileChanged(int profile);
     virtual void test();
     virtual void run();
 
@@ -74,10 +74,10 @@ private:
             QLabel* m_phonemsLabelB;
             QLabel* m_phonemsLabelC;
             QLabel* m_phonemsLabelD;
-            QLineEdit* m_phonemsLineEditA;
-            QLineEdit* m_phonemsLineEditB;
-            QLineEdit* m_phonemsLineEditC;
-            QLineEdit* m_phonemsLineEditD;
+            QKeySequenceEdit* m_phonemsAKeyEdit;
+            QKeySequenceEdit* m_phonemsBKeyEdit;
+            QKeySequenceEdit* m_phonemsCKeyEdit;
+            QKeySequenceEdit* m_phonemsDKeyEdit;
         QPushButton* m_testPushButton;
         QPushButton* m_runPushButton;
 

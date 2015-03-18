@@ -34,10 +34,10 @@ VoiceStickUI::VoiceStickUI(QWidget *parent,
             m_phonemsLabelB = new QLabel(phonemB,this);
             m_phonemsLabelC = new QLabel(phonemC,this);
             m_phonemsLabelD = new QLabel(phonemD,this);
-            m_phonemsLineEditA = new QLineEdit(this);
-            m_phonemsLineEditB = new QLineEdit(this);
-            m_phonemsLineEditC = new QLineEdit(this);
-            m_phonemsLineEditD = new QLineEdit(this);
+            m_phonemsAKeyEdit = new QKeySequenceEdit(this);
+            m_phonemsBKeyEdit = new QKeySequenceEdit(this);
+            m_phonemsCKeyEdit = new QKeySequenceEdit(this);
+            m_phonemsDKeyEdit = new QKeySequenceEdit(this);
         m_testPushButton = new QPushButton("Test",this);
         m_runPushButton = new QPushButton("Run",this);
     m_statusBar = new QStatusBar(this);
@@ -81,10 +81,10 @@ VoiceStickUI::VoiceStickUI(QWidget *parent,
     m_profileHBoxLayout->addWidget(m_newProfileButton);
     m_profileHBoxLayout->addWidget(m_deleteProfileButton);
 
-    m_phonemsFormLayout->addRow(m_phonemsLabelA, m_phonemsLineEditA);
-    m_phonemsFormLayout->addRow(m_phonemsLabelB, m_phonemsLineEditB);
-    m_phonemsFormLayout->addRow(m_phonemsLabelC, m_phonemsLineEditC);
-    m_phonemsFormLayout->addRow(m_phonemsLabelD, m_phonemsLineEditD);
+    m_phonemsFormLayout->addRow(m_phonemsLabelA, m_phonemsAKeyEdit);
+    m_phonemsFormLayout->addRow(m_phonemsLabelB, m_phonemsBKeyEdit);
+    m_phonemsFormLayout->addRow(m_phonemsLabelC, m_phonemsCKeyEdit);
+    m_phonemsFormLayout->addRow(m_phonemsLabelD, m_phonemsDKeyEdit);
 
     //Arrange main window
     setMenuBar(m_menuBar);
@@ -106,7 +106,6 @@ VoiceStickUI::VoiceStickUI(QWidget *parent,
     connect(m_aboutQtAction, SIGNAL(triggered()), this, SLOT(aboutQt()));
 
     //Connect buttons to slots
-    connect(m_profileComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(currentProfileChanged(int)));
     connect(m_newProfileButton, SIGNAL(clicked()), this, SLOT(newProfile()));
     connect(m_deleteProfileButton, SIGNAL(clicked()), this, SLOT(deleteProfile()));
     connect(m_testPushButton, SIGNAL(clicked()), this, SLOT(test()));
@@ -186,11 +185,6 @@ void VoiceStickUI::aboutVoiceStick()
 void VoiceStickUI::aboutQt()
 {
     comingSoonInfoPopup();
-}
-
-void VoiceStickUI::currentProfileChanged(int profile)
-{
-    QMessageBox::information(this, "Profile changed", "New profile:" + QString::number(profile));
 }
 
 void VoiceStickUI::test()
