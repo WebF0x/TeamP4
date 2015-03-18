@@ -27,6 +27,10 @@ public:
     //Returns -1 if the combo box is empty
     int currentProfile();
 
+    //Returns the QKeySequence associated with the nth-phonem
+    //n: index on the phonem between 0 and (numberOfPhonems - 1)
+    QKeySequence getPhonemKeySequence(int n);
+
 protected slots:
     //Default message
     void comingSoonInfoPopup();

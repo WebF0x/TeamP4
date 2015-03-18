@@ -118,6 +118,16 @@ int VoiceStickUI::currentProfile()
     return m_profileComboBox->currentIndex();
 }
 
+QKeySequence VoiceStickUI::getPhonemKeySequence(int n)
+{
+    QKeySequenceEdit* sequenceEditField = m_phonemEdits.value(n);
+
+    //if edit field doesn't existm return empty QKeySequence
+    if(!sequenceEditField) return QKeySequence();
+
+    return sequenceEditField->keySequence();
+}
+
 void VoiceStickUI::comingSoonInfoPopup()
 {
     QMessageBox::information(this,
