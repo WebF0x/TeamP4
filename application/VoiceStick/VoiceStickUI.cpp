@@ -12,8 +12,8 @@ VoiceStickUI::VoiceStickUI(QWidget *parent,
             m_saveAsAction              = new QAction("Save As...", this);
             m_exitAction                = new QAction("Exit", this);
         m_editMenu= new QMenu("Edit", this);
-            m_undoAction                = new QAction("Undo...", this);
-            m_redoAction                = new QAction("Redo...", this);
+            m_undoAction                = new QAction("Undo", this);
+            m_redoAction                = new QAction("Redo", this);
             m_undoAllAction             = new QAction("Undo All...", this);
         m_profileMenu= new QMenu("Profile", this);
             m_newProfileAction          = new QAction("New Profile...", this);
