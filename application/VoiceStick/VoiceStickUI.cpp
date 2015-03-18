@@ -117,6 +117,11 @@ VoiceStickUI::~VoiceStickUI()
     //QMainWindow will take care of deleting all of its children
 }
 
+int VoiceStickUI::currentProfile()
+{
+    return m_profileComboBox->currentIndex();
+}
+
 void VoiceStickUI::comingSoonInfoPopup()
 {
     QMessageBox::information(this, "Coming soon", "The action that you are trying to do is not currently implemented.");

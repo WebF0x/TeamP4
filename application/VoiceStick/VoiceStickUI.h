@@ -22,6 +22,10 @@ public:
     VoiceStickUI(QWidget *parent, const QString& phonemA, const QString& phonemB, const QString& phonemC, const QString& phonemD);
     ~VoiceStickUI();
 
+    //Returns the index of the profile in the combo box
+    //Returns -1 if the combo box is empty
+    int currentProfile();
+
 protected slots:
     //Default message
     void comingSoonInfoPopup();
