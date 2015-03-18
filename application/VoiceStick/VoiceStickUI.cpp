@@ -124,7 +124,9 @@ int VoiceStickUI::currentProfile()
 
 void VoiceStickUI::comingSoonInfoPopup()
 {
-    QMessageBox::information(this, "Coming soon", "The action that you are trying to do is not currently implemented.");
+    QMessageBox::information(this,
+                            "Coming soon",
+                            "Not implemented yet.");
 }
 
 void VoiceStickUI::open()
