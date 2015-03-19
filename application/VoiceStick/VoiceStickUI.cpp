@@ -105,7 +105,7 @@ VoiceStickUI::VoiceStickUI(const QStringList& phonemNames, QWidget *parent)
     connect(m_newProfileButton, SIGNAL(clicked()), this, SLOT(newProfile()));
     connect(m_deleteProfileButton, SIGNAL(clicked()), this, SLOT(deleteProfile()));
     connect(m_testPushButton, SIGNAL(clicked()), this, SLOT(test()));
-    connect(m_runPushButton, SIGNAL(clicked()), this, SLOT(run()));highlight(0);unhighlight(1);
+    connect(m_runPushButton, SIGNAL(clicked()), this, SLOT(run()));
 }
 
 VoiceStickUI::~VoiceStickUI()
