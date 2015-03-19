@@ -105,7 +105,7 @@ VoiceStickUI::VoiceStickUI(const QStringList& phonemNames, QWidget *parent)
     connect(m_newProfileButton, SIGNAL(clicked()), this, SLOT(newProfile()));
     connect(m_deleteProfileButton, SIGNAL(clicked()), this, SLOT(deleteProfile()));
     connect(m_testPushButton, SIGNAL(clicked()), this, SLOT(test()));
-    connect(m_runPushButton, SIGNAL(clicked()), this, SLOT(run()));
+    connect(m_runPushButton, SIGNAL(clicked()), this, SLOT(run()));highlight(0);unhighlight(1);
 }
 
 VoiceStickUI::~VoiceStickUI()
@@ -122,10 +122,25 @@ QKeySequence VoiceStickUI::getPhonemKeySequence(int n)
 {
     QKeySequenceEdit* sequenceEditField = m_phonemEdits.value(n);
 
-    //if edit field doesn't existm return empty QKeySequence
     if(!sequenceEditField) return QKeySequence();
 
     return sequenceEditField->keySequence();
+}
+
+void VoiceStickUI::highlight(int n)
+{
+    QKeySequenceEdit* sequenceEditField = m_phonemEdits.value(n);
+
+    if(sequenceEditField)
+        sequenceEditField->setStyleSheet("QLineEdit {background-color: lightgreen;}");
+}
+
+void VoiceStickUI::unhighlight(int n)
+{
+    QKeySequenceEdit* sequenceEditField = m_phonemEdits.value(n);
+
+    if(sequenceEditField)
+        sequenceEditField->setStyleSheet("QLineEdit {background-color: white;}");
 }
 
 void VoiceStickUI::comingSoonInfoPopup()
