@@ -1,5 +1,5 @@
-#ifndef VOICESTICK_H
-#define VOICESTICK_H
+#ifndef VOICESTICKUI_H
+#define VOICESTICKUI_H
 
 #include <QMainWindow>
 #include <QGroupBox>
@@ -103,4 +103,4 @@ private:
         QFormLayout* m_phonemsFormLayout;
 };
 
-#endif // VOICESTICK_H
+#endif // VOICESTICKUI_H

@@ -14,7 +14,9 @@ CONFIG+=c++11
 
 
 SOURCES += main.cpp \
-    VoiceStickUI.cpp
+    VoiceStickUI.cpp \
+    VoiceStick.cpp
 
 HEADERS  += \
-    VoiceStickUI.h
+    VoiceStickUI.h \
+    VoiceStick.h
