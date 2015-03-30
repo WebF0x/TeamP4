@@ -34,6 +34,9 @@ public:
     //n: index on the phonem between 0 and (numberOfPhonems - 1)
     QKeySequence getPhonemKeySequence(int n);
 
+    //Returns the QKeySequence's associated with the phonems
+    QList<QKeySequence> getPhonemKeySequences();
+
     //Highlights the QKeySequenceEdit associated with the n-th phonem
     void highlight(int n);
 

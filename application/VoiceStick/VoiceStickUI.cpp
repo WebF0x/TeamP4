@@ -134,6 +134,18 @@ QKeySequence VoiceStickUI::getPhonemKeySequence(int n)
     return sequenceEditField->keySequence();
 }
 
+QList<QKeySequence> VoiceStickUI::getPhonemKeySequences()
+{
+    QList<QKeySequence> keySequences;
+
+    for(QKeySequenceEdit* field : m_phonemEdits)
+    {
+        keySequences.append(field->keySequence());
+    }
+
+    return keySequences;
+}
+
 void VoiceStickUI::highlight(int n)
 {
     QKeySequenceEdit* sequenceEditField = m_phonemEdits.value(n);
