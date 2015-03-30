@@ -49,6 +49,7 @@ public slots:
     virtual void undo();
     virtual void redo();
     virtual void undoAll();
+    virtual void profileSelected(int index);
     virtual void newProfile();
     virtual void deleteProfile();
     virtual void deleteAllProfiles();

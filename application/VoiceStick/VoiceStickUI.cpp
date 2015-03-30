@@ -94,6 +94,7 @@ VoiceStickUI::VoiceStickUI(const QStringList& phonemNames, QWidget *parent)
     connect(m_undoAction, SIGNAL(triggered()), this, SLOT(undo()));
     connect(m_redoAction, SIGNAL(triggered()), this, SLOT(redo()));
     connect(m_undoAllAction, SIGNAL(triggered()), this, SLOT(undoAll()));
+    connect(m_profileComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(profileSelected(int)));
     connect(m_newProfileAction, SIGNAL(triggered()), this, SLOT(newProfile()));
     connect(m_deleteProfileAction, SIGNAL(triggered()), this, SLOT(deleteProfile()));
     connect(m_deleteAllProfilesAction, SIGNAL(triggered()), this, SLOT(deleteAllProfiles()));
@@ -187,6 +188,11 @@ void VoiceStickUI::redo()
 }
 
 void VoiceStickUI::undoAll()
+{
+    comingSoonInfoPopup();
+}
+
+void VoiceStickUI::profileSelected(int index)
 {
     comingSoonInfoPopup();
 }
