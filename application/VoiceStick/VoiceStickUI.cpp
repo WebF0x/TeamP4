@@ -118,6 +118,12 @@ int VoiceStickUI::currentProfile()
     return m_profileComboBox->currentIndex();
 }
 
+void VoiceStickUI::setProfileOptions(const QStringList& profileNames)
+{
+    m_profileComboBox->clear();
+    m_profileComboBox->addItems(profileNames);
+}
+
 QKeySequence VoiceStickUI::getPhonemKeySequence(int n)
 {
     QKeySequenceEdit* sequenceEditField = m_phonemEdits.value(n);

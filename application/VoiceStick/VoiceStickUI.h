@@ -27,6 +27,9 @@ public:
     //Returns -1 if the combo box is empty
     int currentProfile();
 
+    //Set the options in the profiles QComboBox
+    void setProfileOptions(const QStringList& profileNames);
+
     //Returns the QKeySequence associated with the n-th phonem
     //n: index on the phonem between 0 and (numberOfPhonems - 1)
     QKeySequence getPhonemKeySequence(int n);
