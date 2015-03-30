@@ -25,7 +25,7 @@ public slots:
 //    virtual void deleteAllProfiles();
 //    virtual void userManual();
 //    virtual void aboutVoiceStick();
-//    virtual void aboutQt();
+    virtual void aboutQt();
     //Buttons
 //    virtual void test();
 //    virtual void run();
