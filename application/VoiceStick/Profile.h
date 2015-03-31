@@ -9,16 +9,23 @@
 
 class Profile
 {
-
- private:
-    int index;
-    QString Title;
-    QVector<QKeySequence> VProfile;
-
  public:
-    Profile(QString, QVector<QKeySequence>);
+    Profile(const QString& title, const QVector<QKeySequence>&);
     Profile();
     ~Profile();
+
+    void setTitle(const QString& title);
+    QString getTittle();
+
+    void setKeySequences(const QVector<QKeySequence>& keySeqs);
+    QVector<QKeySequence> getPhonems();
+
+    void setKeySequence(int index, const QKeySequence& keySeq);
+    QKeySequence getPhonem(int index);
+
+private:
+   QString m_title;
+   QVector<QKeySequence> m_keySequences;
 
 };
 
