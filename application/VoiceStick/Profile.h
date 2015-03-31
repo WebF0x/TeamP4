@@ -11,10 +11,9 @@ class Profile
 {
  public:
     Profile(const QString& title, const QVector<QKeySequence>&);
-    Profile();
 
     void setTitle(const QString& title);
-    QString getTittle();
+    QString getTitle();
 
     void setKeySequences(const QVector<QKeySequence>& keySeqs);
     QVector<QKeySequence> getPhonems();
