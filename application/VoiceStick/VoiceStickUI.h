@@ -14,6 +14,7 @@
 #include <QMessageBox>
 #include <QKeySequenceEdit>
 #include <QStringList>
+#include <QCloseEvent>
 
 class VoiceStickUI : public QMainWindow
 {
@@ -46,9 +47,8 @@ public:
 public slots:
     //Menu actions
     virtual void open();
-    virtual void save();
-    virtual void saveAs();
-    virtual void exit();
+    virtual bool save();    //Returns true at success
+    virtual bool saveAs();  //Returns true at success
     virtual void undo();
     virtual void redo();
     virtual void undoAll();

@@ -91,6 +91,7 @@ VoiceStickUI::VoiceStickUI(const QStringList& phonemNames, QWidget *parent)
     connect(m_openAction, SIGNAL(triggered()), this, SLOT(open()));
     connect(m_saveAction, SIGNAL(triggered()), this, SLOT(save()));
     connect(m_saveAsAction, SIGNAL(triggered()), this, SLOT(saveAs()));
+    connect(m_exitAction, SIGNAL(triggered()), this, SLOT(close()));
     connect(m_undoAction, SIGNAL(triggered()), this, SLOT(undo()));
     connect(m_redoAction, SIGNAL(triggered()), this, SLOT(redo()));
     connect(m_undoAllAction, SIGNAL(triggered()), this, SLOT(undoAll()));
@@ -174,19 +175,16 @@ void VoiceStickUI::open()
     comingSoonInfoPopup();
 }
 
-void VoiceStickUI::save()
+bool VoiceStickUI::save()
 {
     comingSoonInfoPopup();
+    return false;
 }
 
-void VoiceStickUI::saveAs()
+bool VoiceStickUI::saveAs()
 {
     comingSoonInfoPopup();
-}
-
-void VoiceStickUI::exit()
-{
-    comingSoonInfoPopup();
+    return false;
 }
 
 void VoiceStickUI::undo()

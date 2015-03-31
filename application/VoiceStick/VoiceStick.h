@@ -13,9 +13,9 @@ public:
 public slots:
     //Menu actions
 //    virtual void open();
-//    virtual void save();
-//    virtual void saveAs();
-//    virtual void exit();
+//    virtual bool save();
+//    virtual bool saveAs();
+    virtual void closeEvent(QCloseEvent *event);
 //    virtual void undo();
 //    virtual void redo();
 //    virtual void undoAll();
@@ -29,6 +29,9 @@ public slots:
     //Buttons
 //    virtual void test();
 //    virtual void run();
+
+private:
+    bool isModified = false;   //True if closing the program will lose unsaved changes
 };
 
 #endif // VOICESTICK_H
