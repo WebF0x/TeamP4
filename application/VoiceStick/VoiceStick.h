@@ -31,6 +31,13 @@ public slots:
 //    virtual void run();
 
 private:
+    //Warns the user that unsaved changes might be lost and returns the user's choice:
+    //Return values:
+    //  QMessageBox::StandardButton::Save
+    //  QMessageBox::StandardButton::Discard
+    //  QMessageBox::StandardButton::Cancel
+    QMessageBox::StandardButton maybeSave();
+
     bool isModified = false;   //True if closing the program will lose unsaved changes
 };
 

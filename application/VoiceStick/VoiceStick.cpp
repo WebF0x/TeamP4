@@ -4,31 +4,36 @@ VoiceStick::VoiceStick(const QStringList& phonemNames, QWidget *parent) : VoiceS
 {
 }
 
+QMessageBox::StandardButton VoiceStick::maybeSave()
+{
+    if(!isModified) return QMessageBox::StandardButton::Discard;
+
+    QMessageBox::StandardButton choice = QMessageBox::warning
+            (this,
+             "Unsaved changes",
+             "There are unsaved changes.\nWhat do you want to do?",
+             QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel );
+
+    return choice;
+}
+
 void VoiceStick::closeEvent(QCloseEvent* event)
 {
-    if(isModified)
+    switch(maybeSave())
     {
-        QMessageBox::StandardButton choice = QMessageBox::question(this,
-                                                                   "Unsaved changes",
-                                                                   "There are unsaved changes.\nWhat do you want to do?",
-                                                                   QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel );
-
-        switch(choice)
-        {
-        case QMessageBox::StandardButton::Save:
-            if(save()) event->accept();
-            else event->ignore();
-            break;
-        case QMessageBox::StandardButton::Discard:
-            event->accept();
-            break;
-        case QMessageBox::StandardButton::Cancel:
-            event->ignore();
-            break;
-        default:
-            event->ignore();
-            break;
-        }
+    case QMessageBox::StandardButton::Save:
+        if(save()) event->accept();
+        else event->ignore();
+        break;
+    case QMessageBox::StandardButton::Discard:
+        event->accept();
+        break;
+    case QMessageBox::StandardButton::Cancel:
+        event->ignore();
+        break;
+    default:
+        event->ignore();
+        break;
     }
 }
 
