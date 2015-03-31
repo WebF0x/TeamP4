@@ -2,6 +2,7 @@
 #define VOICESTICK_H
 
 #include "VoiceStickUI.h"
+#include "Profile.h"
 
 class VoiceStick : public VoiceStickUI
 {

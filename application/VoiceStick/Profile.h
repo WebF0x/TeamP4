@@ -12,7 +12,6 @@ class Profile
  public:
     Profile(const QString& title, const QVector<QKeySequence>&);
     Profile();
-    ~Profile();
 
     void setTitle(const QString& title);
     QString getTittle();
