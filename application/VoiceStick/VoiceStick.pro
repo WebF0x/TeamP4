@@ -16,4 +16,5 @@ SOURCES += main.cpp \
     VoiceStickUI.cpp
 
 HEADERS  += \
-    VoiceStickUI.h
+    VoiceStickUI.h \
+    Profile.h

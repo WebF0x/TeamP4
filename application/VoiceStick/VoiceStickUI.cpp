@@ -1,4 +1,5 @@
 #include "VoiceStickUI.h"
+#include <vector>
 
 VoiceStickUI::VoiceStickUI(QWidget *parent,
                            const QString& phonemA, const QString& phonemB, const QString& phonemC, const QString& phonemD)
