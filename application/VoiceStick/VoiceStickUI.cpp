@@ -1,8 +1,7 @@
 #include "VoiceStickUI.h"
 #include <vector>
 
-VoiceStickUI::VoiceStickUI(QWidget *parent,
-                           const QString& phonemA, const QString& phonemB, const QString& phonemC, const QString& phonemD)
+VoiceStickUI::VoiceStickUI(const QStringList& phonemNames, QWidget *parent)
     : QMainWindow(parent)
 {
     //Init widgets
@@ -31,14 +30,11 @@ VoiceStickUI::VoiceStickUI(QWidget *parent,
             m_newProfileButton = new QPushButton("New...",this);
             m_deleteProfileButton = new QPushButton("Delete...",this);
         m_phonemsGroupBox = new QGroupBox("Phonems",this);
-            m_phonemsLabelA = new QLabel(phonemA,this);
-            m_phonemsLabelB = new QLabel(phonemB,this);
-            m_phonemsLabelC = new QLabel(phonemC,this);
-            m_phonemsLabelD = new QLabel(phonemD,this);
-            m_phonemsAKeyEdit = new QKeySequenceEdit(this);
-            m_phonemsBKeyEdit = new QKeySequenceEdit(this);
-            m_phonemsCKeyEdit = new QKeySequenceEdit(this);
-            m_phonemsDKeyEdit = new QKeySequenceEdit(this);
+            for(int i=0; i<phonemNames.size(); ++i)
+            {
+                m_phonemLabels.append(new QLabel(phonemNames.at(i),this));
+                m_phonemEdits.append(new QKeySequenceEdit(this));
+            }
         m_testPushButton = new QPushButton("Test",this);
         m_runPushButton = new QPushButton("Run",this);
     m_statusBar = new QStatusBar(this);
@@ -82,10 +78,10 @@ VoiceStickUI::VoiceStickUI(QWidget *parent,
     m_profileHBoxLayout->addWidget(m_newProfileButton);
     m_profileHBoxLayout->addWidget(m_deleteProfileButton);
 
-    m_phonemsFormLayout->addRow(m_phonemsLabelA, m_phonemsAKeyEdit);
-    m_phonemsFormLayout->addRow(m_phonemsLabelB, m_phonemsBKeyEdit);
-    m_phonemsFormLayout->addRow(m_phonemsLabelC, m_phonemsCKeyEdit);
-    m_phonemsFormLayout->addRow(m_phonemsLabelD, m_phonemsDKeyEdit);
+    for(int i=0; i<phonemNames.size(); ++i)
+    {
+        m_phonemsFormLayout->addRow(m_phonemLabels.at(i), m_phonemEdits.at(i));
+    }
 
     //Arrange main window
     setMenuBar(m_menuBar);
@@ -96,9 +92,11 @@ VoiceStickUI::VoiceStickUI(QWidget *parent,
     connect(m_openAction, SIGNAL(triggered()), this, SLOT(open()));
     connect(m_saveAction, SIGNAL(triggered()), this, SLOT(save()));
     connect(m_saveAsAction, SIGNAL(triggered()), this, SLOT(saveAs()));
+    connect(m_exitAction, SIGNAL(triggered()), this, SLOT(close()));
     connect(m_undoAction, SIGNAL(triggered()), this, SLOT(undo()));
     connect(m_redoAction, SIGNAL(triggered()), this, SLOT(redo()));
     connect(m_undoAllAction, SIGNAL(triggered()), this, SLOT(undoAll()));
+    connect(m_profileComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(profileSelected(int)));
     connect(m_newProfileAction, SIGNAL(triggered()), this, SLOT(newProfile()));
     connect(m_deleteProfileAction, SIGNAL(triggered()), this, SLOT(deleteProfile()));
     connect(m_deleteAllProfilesAction, SIGNAL(triggered()), this, SLOT(deleteAllProfiles()));
@@ -123,6 +121,49 @@ int VoiceStickUI::currentProfile()
     return m_profileComboBox->currentIndex();
 }
 
+void VoiceStickUI::setProfileOptions(const QStringList& profileNames)
+{
+    m_profileComboBox->clear();
+    m_profileComboBox->addItems(profileNames);
+}
+
+QKeySequence VoiceStickUI::getPhonemKeySequence(int n)
+{
+    QKeySequenceEdit* sequenceEditField = m_phonemEdits.value(n);
+
+    if(!sequenceEditField) return QKeySequence();
+
+    return sequenceEditField->keySequence();
+}
+
+QList<QKeySequence> VoiceStickUI::getPhonemKeySequences()
+{
+    QList<QKeySequence> keySequences;
+
+    for(QKeySequenceEdit* field : m_phonemEdits)
+    {
+        keySequences.append(field->keySequence());
+    }
+
+    return keySequences;
+}
+
+void VoiceStickUI::highlight(int n)
+{
+    QKeySequenceEdit* sequenceEditField = m_phonemEdits.value(n);
+
+    if(sequenceEditField)
+        sequenceEditField->setStyleSheet("QLineEdit {background-color: lightgreen;}");
+}
+
+void VoiceStickUI::unhighlight(int n)
+{
+    QKeySequenceEdit* sequenceEditField = m_phonemEdits.value(n);
+
+    if(sequenceEditField)
+        sequenceEditField->setStyleSheet("QLineEdit {background-color: white;}");
+}
+
 void VoiceStickUI::comingSoonInfoPopup()
 {
     QMessageBox::information(this,
@@ -135,19 +176,16 @@ void VoiceStickUI::open()
     comingSoonInfoPopup();
 }
 
-void VoiceStickUI::save()
+bool VoiceStickUI::save()
 {
     comingSoonInfoPopup();
+    return false;
 }
 
-void VoiceStickUI::saveAs()
+bool VoiceStickUI::saveAs()
 {
     comingSoonInfoPopup();
-}
-
-void VoiceStickUI::exit()
-{
-    comingSoonInfoPopup();
+    return false;
 }
 
 void VoiceStickUI::undo()
@@ -161,6 +199,11 @@ void VoiceStickUI::redo()
 }
 
 void VoiceStickUI::undoAll()
+{
+    comingSoonInfoPopup();
+}
+
+void VoiceStickUI::profileSelected(int index)
 {
     comingSoonInfoPopup();
 }

@@ -10,11 +10,17 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = VoiceStick
 TEMPLATE = app
+CONFIG+=c++11
 
 
 SOURCES += main.cpp \
-    VoiceStickUI.cpp
+    VoiceStickUI.cpp \
+    VoiceStick.cpp
 
 HEADERS  += \
     VoiceStickUI.h \
+<<<<<<< HEAD
     Profile.h
+=======
+    VoiceStick.h
+>>>>>>> origin/master
