@@ -4,6 +4,8 @@
 #include "VoiceStickUI.h"
 #include "Profile.h"
 #include <QFileDialog>
+#include <QFile>
+#include <QString>
 
 class VoiceStick : public VoiceStickUI
 {
@@ -11,12 +13,13 @@ class VoiceStick : public VoiceStickUI
 
 public:
     VoiceStick(const QStringList& phonemNames, QWidget *parent = 0);
+    bool saveAs(const QString& fileName);
 
 public slots:
     //Menu actions
 //    virtual void open();
 //    virtual bool save();
-//    virtual bool saveAs();
+    virtual bool saveAs();
     virtual void closeEvent(QCloseEvent *event);
 //    virtual void undo();
 //    virtual void redo();
@@ -40,7 +43,8 @@ private:
     //  QMessageBox::StandardButton::Cancel
     QMessageBox::StandardButton maybeSave();
 
-    bool isModified = false;   //True if closing the program will lose unsaved changes
+    QString m_currentFileName;
+    bool m_isModified = false;   //True if closing the program will lose unsaved changes
 };
 
 #endif // VOICESTICK_H

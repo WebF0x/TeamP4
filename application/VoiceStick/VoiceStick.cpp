@@ -6,7 +6,7 @@ VoiceStick::VoiceStick(const QStringList& phonemNames, QWidget *parent) : VoiceS
 
 QMessageBox::StandardButton VoiceStick::maybeSave()
 {
-    if(!isModified) return QMessageBox::StandardButton::Discard;
+    if(!m_isModified) return QMessageBox::StandardButton::Discard;
 
     QMessageBox::StandardButton choice = QMessageBox::warning
             (this,
@@ -42,12 +42,35 @@ void VoiceStick::aboutQt()
     QMessageBox::aboutQt(this,"About Qt");
 }
 
-/*
+//*
 bool VoiceStick::saveAs()
 {
-    QUrl url = QFileDialog::getSaveFileUrl();
-    // ...
-    return true;
+    QString fileName(QFileDialog::getSaveFileName());
+
+    return saveAs(fileName);
+}
+
+bool VoiceStick::saveAs(const QString& fileName)
+{
+    QFile file(fileName);   //Closed by destructor
+
+    if(!file.open( QIODevice::WriteOnly ))  //Can't open file
+    {
+        QMessageBox::warning
+                (this,
+                 "Save failed",
+                 "Cannot open file.",
+                 QMessageBox::Ok );
+
+        return false;
+    }
+    else
+    {
+        m_currentFileName = fileName;
+        //Save (there were no errors)
+        //TODO ... Write file
+        return true;
+    }
 }
 //*/
 
