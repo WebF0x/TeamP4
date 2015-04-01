@@ -11,6 +11,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = VoiceStick
 TEMPLATE = app
 CONFIG+=c++11
+DEFINES += Q_COMPILER_INITIALIZER_LISTS
 
 
 SOURCES += main.cpp \
