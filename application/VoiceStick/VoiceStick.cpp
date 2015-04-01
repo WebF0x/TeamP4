@@ -41,3 +41,20 @@ void VoiceStick::aboutQt()
 {
     QMessageBox::aboutQt(this,"About Qt");
 }
+
+/*
+bool VoiceStick::saveAs()
+{
+    QUrl url = QFileDialog::getSaveFileUrl();
+    // ...
+    return true;
+}
+//*/
+
+/*
+void VoiceStick::open()
+{
+    QUrl url = QFileDialog::getOpenFileUrl();
+    // ...
+}
+//*/

@@ -3,6 +3,7 @@
 
 #include "VoiceStickUI.h"
 #include "Profile.h"
+#include <QFileDialog>
 
 class VoiceStick : public VoiceStickUI
 {
