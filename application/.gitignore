@@ -1,2 +1,9 @@
 *Debug*/
 *.pro.user
+*.Debug
+*Makefile.Release
+*VoiceStick.opensdf
+*VoiceStick.sdf
+*.suo
+*.vcxproj*
+*Makefile
