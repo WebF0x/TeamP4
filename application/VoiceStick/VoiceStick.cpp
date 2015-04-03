@@ -2,6 +2,7 @@
 
 VoiceStick::VoiceStick(const QStringList& phonemNames, QWidget *parent) : VoiceStickUI(phonemNames, parent)
 {
+
 }
 
 QMessageBox::StandardButton VoiceStick::maybeSave()
@@ -15,6 +16,20 @@ QMessageBox::StandardButton VoiceStick::maybeSave()
              QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel );
 
     return choice;
+}
+
+void VoiceStick::updateUI()
+{
+    //Update profile choices
+    QStringList profileOptions;
+    for(const Profile& profile : m_profiles)
+    {
+        profileOptions.append(profile.getTitle());
+    }
+    setProfileOptions(profileOptions);
+
+    //Update phonem fields of the selected profile
+    setPhonemKeySequences(m_profiles.at(currentProfile()).getPhonems());
 }
 
 void VoiceStick::closeEvent(QCloseEvent* event)
@@ -35,6 +50,32 @@ void VoiceStick::closeEvent(QCloseEvent* event)
         event->ignore();
         break;
     }
+}
+
+void VoiceStick::newProfile()
+{
+    //Choose profile name
+    QString title = QInputDialog::getText(this, "New Profile", "Profile name ("+QString::number(MAX_PROFILE_NAME_LENGTH)+" characters or less):");
+    title = title.trimmed(); //Remove whitespaces from the start and the end
+
+    if(title.isEmpty())
+    {
+        QMessageBox::warning(this, "Error", "Profile name cannot be blank.");
+        return;
+    }
+
+    if(title.length() > MAX_PROFILE_NAME_LENGTH)
+    {
+        QMessageBox::warning(this, "Error", "Profile name must be "+QString::number(MAX_PROFILE_NAME_LENGTH)+" characters or less.");
+        return;
+    }
+
+    //Create profile with empty phonems' QKeySequence's. Add to UI and select it.
+    QVector<QKeySequence> keySeqs(numberOfPhonems(), QKeySequence());
+
+    m_profiles.append({title, keySeqs});
+    updateUI();
+    selectProfile(m_profiles.size()-1);
 }
 
 void VoiceStick::aboutQt()

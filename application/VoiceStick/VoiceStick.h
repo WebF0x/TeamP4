@@ -6,6 +6,7 @@
 #include <QFileDialog>
 #include <QFile>
 #include <QString>
+#include <QInputDialog>
 
 class VoiceStick : public VoiceStickUI
 {
@@ -25,7 +26,12 @@ public slots:
 //    virtual void redo();
 //    virtual void undoAll();
 //    virtual void profileSelected(int index);
-//    virtual void newProfile();
+
+    //Prompt user for a profile name.
+    //If it's invalid, alert user of the error.
+    //If it's valid, create a profile with the corresponding name and empty phonem QKeySequences. Add it to UI and select it.
+    virtual void newProfile();
+
 //    virtual void deleteProfile();
 //    virtual void deleteAllProfiles();
 //    virtual void userManual();
@@ -43,8 +49,14 @@ private:
     //  QMessageBox::StandardButton::Cancel
     QMessageBox::StandardButton maybeSave();
 
+    //Update the profile choices and the phonem fields of the selected profile
+    void updateUI();
+
+    QVector<Profile> m_profiles;
     QString m_currentFileName;
     bool m_isModified = false;   //True if closing the program will lose unsaved changes
+
+    static const int MAX_PROFILE_NAME_LENGTH = 30;
 };
 
 #endif // VOICESTICK_H
