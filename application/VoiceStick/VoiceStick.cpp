@@ -29,7 +29,7 @@ void VoiceStick::updateUI()
     setProfileOptions(profileOptions);
 
     //Update phonem fields of the selected profile
-    setPhonemKeySequences(m_profiles.at(currentProfile()).getPhonems());
+    setPhonemKeySequences(m_profiles.at(currentProfileIndex()).getPhonems());
 }
 
 void VoiceStick::closeEvent(QCloseEvent* event)
@@ -50,6 +50,11 @@ void VoiceStick::closeEvent(QCloseEvent* event)
         event->ignore();
         break;
     }
+}
+
+void VoiceStick::profileSelected(int index)
+{
+    //Nothing to do.
 }
 
 void VoiceStick::newProfile()

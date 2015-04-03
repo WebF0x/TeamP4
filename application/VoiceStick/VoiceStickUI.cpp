@@ -116,7 +116,7 @@ VoiceStickUI::~VoiceStickUI()
     //QMainWindow will take care of deleting all of its children
 }
 
-int VoiceStickUI::currentProfile() const
+int VoiceStickUI::currentProfileIndex() const
 {
     return m_profileComboBox->currentIndex();
 }

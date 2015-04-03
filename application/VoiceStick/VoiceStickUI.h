@@ -26,7 +26,7 @@ public:
 
     //Returns the index of the profile in the combo box
     //Returns -1 if the combo box is empty
-    int currentProfile() const;
+    int currentProfileIndex() const;
 
     //Set the options in the profiles QComboBox
     void setProfileOptions(const QStringList& profileNames);

@@ -25,7 +25,7 @@ public slots:
 //    virtual void undo();
 //    virtual void redo();
 //    virtual void undoAll();
-//    virtual void profileSelected(int index);
+    virtual void profileSelected(int index);
 
     //Prompt user for a profile name.
     //If it's invalid, alert user of the error.
