@@ -11,8 +11,7 @@ Profile::Profile (const QString &title, const QVector<QKeySequence> & keySeq)
 Profile::Profile()
 {
     m_title = "Default Profile";
-    m_keySequences = QVector<QKeySequence>( {QKeySequence(),QKeySequence(),QKeySequence(),QKeySequence()} );
-    //QVector<QKeySequence> keySeqs({QKeySequence(),QKeySequence(),QKeySequence(),QKeySequence()});
+    m_keySequences = QVector<QKeySequence>(4, QKeySequence());
 }
 
 void Profile::setTitle(const QString& title)
