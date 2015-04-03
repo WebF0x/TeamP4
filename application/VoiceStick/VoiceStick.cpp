@@ -76,6 +76,8 @@ void VoiceStick::newProfile()
     m_profiles.append({title, keySeqs});
     updateUI();
     selectProfile(m_profiles.size()-1);
+
+    m_isModified = true;
 }
 
 void VoiceStick::aboutQt()
@@ -110,6 +112,7 @@ bool VoiceStick::saveAs(const QString& fileName)
         m_currentFileName = fileName;
         //Save (there were no errors)
         //TODO ... Write file
+        //m_isModified = false;
         return true;
     }
 }
