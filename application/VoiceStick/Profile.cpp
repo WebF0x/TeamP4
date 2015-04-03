@@ -8,13 +8,19 @@ Profile::Profile (const QString &title, const QVector<QKeySequence> & keySeq)
     m_keySequences = keySeq;
 }
 
+Profile::Profile()
+{
+    m_title = "Default Profile";
+    m_keySequences = QVector<QKeySequence>( {QKeySequence(),QKeySequence(),QKeySequence(),QKeySequence()} );
+    //QVector<QKeySequence> keySeqs({QKeySequence(),QKeySequence(),QKeySequence(),QKeySequence()});
+}
 
 void Profile::setTitle(const QString& title)
 {
     m_title = title;
 }
 
-QString Profile::getTitle()
+QString Profile::getTitle() const
 {
     return m_title;
 }
@@ -24,7 +30,7 @@ void Profile::setKeySequences(const QVector<QKeySequence>& keySeqs)
     m_keySequences = keySeqs;
 }
 
-QVector<QKeySequence> Profile::getPhonems()
+QVector<QKeySequence> Profile::getPhonems() const
 {
     return m_keySequences;
 }
@@ -37,7 +43,7 @@ void Profile::setKeySequence(int index, const QKeySequence& keySeq)
     }
 }
 
-QKeySequence Profile::getPhonem(int index)
+QKeySequence Profile::getPhonem(int index) const
 {
     return m_keySequences.value(index);
 }
