@@ -22,27 +22,36 @@ class VoiceStickUI : public QMainWindow
 
 public:
     VoiceStickUI(const QStringList& phonemNames, QWidget *parent = 0);
-    ~VoiceStickUI();
+    virtual ~VoiceStickUI();
 
     //Returns the index of the profile in the combo box
     //Returns -1 if the combo box is empty
-    int currentProfile();
+    int currentProfile() const;
 
     //Set the options in the profiles QComboBox
     void setProfileOptions(const QStringList& profileNames);
 
     //Returns the QKeySequence associated with the n-th phonem
     //n: index on the phonem between 0 and (numberOfPhonems - 1)
-    QKeySequence getPhonemKeySequence(int n);
+    QKeySequence getPhonemKeySequence(int n) const;
 
     //Returns the QKeySequence's associated with the phonems
-    QList<QKeySequence> getPhonemKeySequences();
+    QVector<QKeySequence> getPhonemKeySequences() const;
+
+    //Sets the phonems' QKeySequence's
+    void setPhonemKeySequences(QVector<QKeySequence> keySeqs);
 
     //Highlights the QKeySequenceEdit associated with the n-th phonem
     void highlight(int n);
 
     //Unhighlights the QKeySequenceEdit associated with the n-th phonem
     void unhighlight(int n);
+
+    //Returns the number of phonems
+    int numberOfPhonems() const;
+
+    //Selects n-th profile
+    void selectProfile(int n);
 
 public slots:
     //Menu actions

@@ -116,9 +116,14 @@ VoiceStickUI::~VoiceStickUI()
     //QMainWindow will take care of deleting all of its children
 }
 
-int VoiceStickUI::currentProfile()
+int VoiceStickUI::currentProfile() const
 {
     return m_profileComboBox->currentIndex();
+}
+
+void VoiceStickUI::selectProfile(int n)
+{
+    m_profileComboBox->setCurrentIndex(n);
 }
 
 void VoiceStickUI::setProfileOptions(const QStringList& profileNames)
@@ -127,7 +132,7 @@ void VoiceStickUI::setProfileOptions(const QStringList& profileNames)
     m_profileComboBox->addItems(profileNames);
 }
 
-QKeySequence VoiceStickUI::getPhonemKeySequence(int n)
+QKeySequence VoiceStickUI::getPhonemKeySequence(int n) const
 {
     QKeySequenceEdit* sequenceEditField = m_phonemEdits.value(n);
 
@@ -136,9 +141,9 @@ QKeySequence VoiceStickUI::getPhonemKeySequence(int n)
     return sequenceEditField->keySequence();
 }
 
-QList<QKeySequence> VoiceStickUI::getPhonemKeySequences()
+QVector<QKeySequence> VoiceStickUI::getPhonemKeySequences() const
 {
-    QList<QKeySequence> keySequences;
+    QVector<QKeySequence> keySequences;
 
     for(QKeySequenceEdit* field : m_phonemEdits)
     {
@@ -146,6 +151,14 @@ QList<QKeySequence> VoiceStickUI::getPhonemKeySequences()
     }
 
     return keySequences;
+}
+
+void VoiceStickUI::setPhonemKeySequences(QVector<QKeySequence> keySeqs)
+{
+    for(int i=0; i< keySeqs.size(); ++i)
+    {
+        m_phonemEdits.at(i)->setKeySequence(keySeqs.at(i));
+    }
 }
 
 void VoiceStickUI::highlight(int n)
@@ -162,6 +175,11 @@ void VoiceStickUI::unhighlight(int n)
 
     if(sequenceEditField)
         sequenceEditField->setStyleSheet("QLineEdit {background-color: white;}");
+}
+
+int VoiceStickUI::numberOfPhonems() const
+{
+    return m_phonemLabels.size();
 }
 
 void VoiceStickUI::comingSoonInfoPopup()
