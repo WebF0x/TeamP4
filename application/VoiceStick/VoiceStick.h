@@ -33,7 +33,7 @@ public slots:
 
     //Delete selected profile
     virtual void deleteProfile();
-//    virtual void deleteAllProfiles();
+    virtual void deleteAllProfiles();
 //    virtual void userManual();
 //    virtual void aboutVoiceStick();
     virtual void aboutQt();

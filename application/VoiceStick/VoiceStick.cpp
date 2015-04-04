@@ -127,6 +127,25 @@ void VoiceStick::deleteProfile()
     m_isModified = true;
 }
 
+void VoiceStick::deleteAllProfiles()
+{
+    //Prompt user for confirmation
+    QMessageBox::StandardButton choice = QMessageBox::warning
+            (this,
+             "Delete all profiles",
+             "Are you sure you want to delete all profiles?",
+             QMessageBox::Yes | QMessageBox::Cancel,
+             QMessageBox::Yes);
+
+    if(choice == QMessageBox::Cancel) return;
+
+    //Delete all profiles
+    m_profiles.clear();
+    updateUI();
+
+    m_isModified = true;
+}
+
 void VoiceStick::aboutQt()
 {
     QMessageBox::aboutQt(this,"About Qt");
