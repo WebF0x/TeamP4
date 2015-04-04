@@ -61,7 +61,12 @@ void VoiceStick::newProfile()
 {
     //Prompt user for profile name
     bool notCancelled;
-    QString title = QInputDialog::getText(this, "New Profile", "Profile name ("+QString::number(MAX_PROFILE_NAME_LENGTH)+" characters or less):","",&notCancelled);
+    QString title = QInputDialog::getText(this,
+        "New Profile",
+        "Profile name ("+QString::number(MAX_PROFILE_NAME_LENGTH)+" characters or less):",
+        QLineEdit::Normal,
+        "",
+        &notCancelled);
 
     if(notCancelled)
     {
