@@ -216,7 +216,7 @@ bool VoiceStick::saveAs(const QString& fileName)
         return true;
     }
 }
-#include <QDebug>
+
 void VoiceStick::open()
 {
     QString fileName = QFileDialog::getOpenFileName();
