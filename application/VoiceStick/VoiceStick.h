@@ -25,7 +25,6 @@ public slots:
 //    virtual void undo();
 //    virtual void redo();
 //    virtual void undoAll();
-    virtual void profileSelected(int index);
 
     //Prompt user for a profile name.
     //If it's invalid, alert user of the error.
@@ -40,6 +39,11 @@ public slots:
     //Buttons
 //    virtual void test();
 //    virtual void run();
+
+    //User chooses profile
+    virtual void profileSelected(int index);
+    //User changes a phonem's QKeySequence
+    virtual void phonemKeySequenceModified();
 
 private:
     //Warns the user that unsaved changes might be lost and returns the user's choice:

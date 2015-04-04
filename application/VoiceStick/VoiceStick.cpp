@@ -52,11 +52,6 @@ void VoiceStick::closeEvent(QCloseEvent* event)
     }
 }
 
-void VoiceStick::profileSelected(int index)
-{
-    //Nothing to do.
-}
-
 void VoiceStick::newProfile()
 {
     //Prompt user for profile name
@@ -140,3 +135,19 @@ void VoiceStick::open()
     // ...
 }
 //*/
+
+void VoiceStick::profileSelected(int index)
+{
+    //Nothing to do.
+}
+
+void VoiceStick::phonemKeySequenceModified()
+{
+    if(currentProfileIndex() == -1) return;   //No profile selected
+
+    Profile& currentProfile = m_profiles[ currentProfileIndex() ];  //modifiable reference
+    QVector<QKeySequence> keySequences = getPhonemKeySequences();
+
+    currentProfile.setKeySequences(keySequences);
+    m_isModified = true;
+}
