@@ -151,46 +151,135 @@ void VoiceStick::aboutQt()
     QMessageBox::aboutQt(this,"About Qt");
 }
 
-//*
+bool VoiceStick::save()
+{
+    if( saveAs(m_currentFileName) ) //Save successful
+    {
+        return true;
+    }
+    else
+    {
+        return saveAs();
+    }
+}
+
 bool VoiceStick::saveAs()
 {
     QString fileName(QFileDialog::getSaveFileName());
 
-    return saveAs(fileName);
-}
+    bool saveSuccessful = saveAs(fileName);
 
-bool VoiceStick::saveAs(const QString& fileName)
-{
-    QFile file(fileName);   //Closed by destructor
-
-    if(!file.open( QIODevice::WriteOnly ))  //Can't open file
+    if(!saveSuccessful)
     {
         QMessageBox::warning
                 (this,
                  "Save failed",
                  "Cannot open file.",
                  QMessageBox::Ok );
+    }
 
+    return saveSuccessful;
+}
+
+bool VoiceStick::saveAs(const QString& fileName)
+{
+    if(fileName.trimmed().isEmpty()) return false;  //Empty filename
+
+    QFile file(fileName);   //Closed by destructor
+
+    if(!file.open( QIODevice::WriteOnly ))  //Can't open file
+    {
         return false;
     }
     else
     {
+        //Remember current file name
         m_currentFileName = fileName;
-        //Save (there were no errors)
-        //TODO ... Write file
-        //m_isModified = false;
+
+        //Save profiles in file
+        QTextStream out(&file);
+
+        for (const Profile& profile : m_profiles)
+        {
+            out << profile.getTitle() + ";";
+
+            for(const QKeySequence& keySeq : profile.getPhonems())
+            {
+                out << keySeq.toString() + ";";
+            }
+
+            out << "\n";
+        }
+
+        m_isModified = false;
+
         return true;
     }
 }
-//*/
-
-/*
+#include <QDebug>
 void VoiceStick::open()
 {
-    QUrl url = QFileDialog::getOpenFileUrl();
-    // ...
+    QString fileName = QFileDialog::getOpenFileName();
+    if(fileName.trimmed().isEmpty()) return;  //Empty filename
+
+    QFile file(fileName);
+
+    if(!file.open( QIODevice::ReadOnly ))  //Can't open file
+    {
+        QMessageBox::warning
+                (this,
+                 "Open failed",
+                 "Cannot open file.",
+                 QMessageBox::Ok );
+
+        return;
+    }
+    else
+    {
+        //Before losing data, ask user to save
+        switch(maybeSave())
+        {
+        case QMessageBox::StandardButton::Save:
+            save();
+            break;
+        case QMessageBox::StandardButton::Discard:
+            break;
+        case QMessageBox::StandardButton::Cancel:
+            return;
+            break;
+        default:
+            return;
+            break;
+        }
+
+        //Delete current profiles
+        m_profiles.clear();
+
+        //Remember current file name
+        m_currentFileName = fileName;
+
+        //Read profiles in file
+        QTextStream in(&file);
+
+        while(!in.atEnd())
+        {
+            QString line = in.readLine();
+            QStringList data = line.split(";");
+
+            QString title = data.at(0);
+            QVector<QKeySequence> keySeqs;
+            for(int i=1; i<data.size()-1; ++i)
+            {
+                keySeqs.append(QKeySequence::fromString(data.at(i)));
+            }
+
+            m_profiles.append({title,keySeqs});
+        }
+        updateUI();
+
+        m_isModified = false;
+    }
 }
-//*/
 
 void VoiceStick::profileSelected(int index)
 {

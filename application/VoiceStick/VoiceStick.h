@@ -7,6 +7,7 @@
 #include <QFile>
 #include <QString>
 #include <QInputDialog>
+#include <QTextStream>
 
 class VoiceStick : public VoiceStickUI
 {
@@ -18,8 +19,8 @@ public:
 
 public slots:
     //Menu actions
-//    virtual void open();
-//    virtual bool save();
+    virtual void open();
+    virtual bool save();
     virtual bool saveAs();
     virtual void closeEvent(QCloseEvent *event);
 //    virtual void undo();
