@@ -18,18 +18,32 @@ QMessageBox::StandardButton VoiceStick::maybeSave()
     return choice;
 }
 
-void VoiceStick::updateUI()
+void VoiceStick::updateProfileOptions()
 {
-    //Update profile choices
     QStringList profileOptions;
     for(const Profile& profile : m_profiles)
     {
         profileOptions.append(profile.getTitle());
     }
     setProfileOptions(profileOptions);
+}
 
-    //Update phonem fields of the selected profile
-    setPhonemKeySequences(m_profiles.at(currentProfileIndex()).getPhonems());
+void VoiceStick::updatePhonemKeySequences()
+{
+    if(currentProfileIndex() != -1)
+    {
+        setPhonemKeySequences(m_profiles.at(currentProfileIndex()).getPhonems());
+    }
+    else
+    {
+        setPhonemKeySequences({numberOfPhonems(),QKeySequence()});
+    }
+}
+
+void VoiceStick::updateUI()
+{
+    updateProfileOptions();
+    updatePhonemKeySequences();
 }
 
 void VoiceStick::closeEvent(QCloseEvent* event)
@@ -83,11 +97,34 @@ void VoiceStick::newProfile()
         QVector<QKeySequence> keySeqs(numberOfPhonems(), QKeySequence());
 
         m_profiles.append({title, keySeqs});
-        updateUI();
+        updateProfileOptions();
         selectProfile(m_profiles.size()-1);
 
         m_isModified = true;
     }
+}
+
+void VoiceStick::deleteProfile()
+{
+    if(currentProfileIndex() == -1) return;   //No profile selected
+
+    //Prompt user for confirmation
+    QString currentProfileName = m_profiles.at(currentProfileIndex()).getTitle();
+    QMessageBox::StandardButton choice = QMessageBox::warning
+            (this,
+             "Delete profile",
+             "Are you sure you want to delete \"" + currentProfileName + "\"?",
+             QMessageBox::Yes | QMessageBox::Cancel,
+             QMessageBox::Yes);
+
+    if(choice == QMessageBox::Cancel) return;
+
+    //Delete profile
+    m_profiles.remove(currentProfileIndex());
+    updateUI();
+
+    //Mark as modified
+    m_isModified = true;
 }
 
 void VoiceStick::aboutQt()
@@ -138,7 +175,7 @@ void VoiceStick::open()
 
 void VoiceStick::profileSelected(int index)
 {
-    //Nothing to do.
+    updatePhonemKeySequences();
 }
 
 void VoiceStick::phonemKeySequenceModified()

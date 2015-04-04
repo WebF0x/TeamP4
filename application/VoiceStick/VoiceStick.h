@@ -31,7 +31,8 @@ public slots:
     //If it's valid, create a profile with the corresponding name and empty phonem QKeySequences. Add it to UI and select it.
     virtual void newProfile();
 
-//    virtual void deleteProfile();
+    //Delete selected profile
+    virtual void deleteProfile();
 //    virtual void deleteAllProfiles();
 //    virtual void userManual();
 //    virtual void aboutVoiceStick();
@@ -53,8 +54,14 @@ private:
     //  QMessageBox::StandardButton::Cancel
     QMessageBox::StandardButton maybeSave();
 
-    //Update the profile choices and the phonem fields of the selected profile
+    //Update the profile options and the phonem fields of the selected profile
     void updateUI();
+
+    //Update the profile options
+    void updateProfileOptions();
+
+    //Update the phonem fields of the selected profile
+    void updatePhonemKeySequences();
 
     QVector<Profile> m_profiles;
     QString m_currentFileName;
