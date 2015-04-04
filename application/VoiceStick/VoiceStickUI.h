@@ -15,6 +15,7 @@
 #include <QKeySequenceEdit>
 #include <QStringList>
 #include <QCloseEvent>
+#include <QVector>
 
 class VoiceStickUI : public QMainWindow
 {
@@ -61,7 +62,6 @@ public slots:
     virtual void undo();
     virtual void redo();
     virtual void undoAll();
-    virtual void profileSelected(int index);
     virtual void newProfile();
     virtual void deleteProfile();
     virtual void deleteAllProfiles();
@@ -71,6 +71,10 @@ public slots:
     //Buttons
     virtual void test();
     virtual void run();
+    //User chooses profile
+    virtual void profileSelected(int index);
+    //User changes a phonem's QKeySequence
+    virtual void phonemKeySequenceModified();
 
 private:
     //Default message
@@ -102,8 +106,8 @@ private:
             QPushButton* m_newProfileButton;
             QPushButton* m_deleteProfileButton;
         QGroupBox* m_phonemsGroupBox;
-            QList<QLabel*> m_phonemLabels;
-            QList<QKeySequenceEdit*> m_phonemEdits;
+            QVector<QLabel*> m_phonemLabels;
+            QVector<QKeySequenceEdit*> m_phonemEdits;
         QPushButton* m_testPushButton;
         QPushButton* m_runPushButton;
 

@@ -96,7 +96,6 @@ VoiceStickUI::VoiceStickUI(const QStringList& phonemNames, QWidget *parent)
     connect(m_undoAction, SIGNAL(triggered()), this, SLOT(undo()));
     connect(m_redoAction, SIGNAL(triggered()), this, SLOT(redo()));
     connect(m_undoAllAction, SIGNAL(triggered()), this, SLOT(undoAll()));
-    connect(m_profileComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(profileSelected(int)));
     connect(m_newProfileAction, SIGNAL(triggered()), this, SLOT(newProfile()));
     connect(m_deleteProfileAction, SIGNAL(triggered()), this, SLOT(deleteProfile()));
     connect(m_deleteAllProfilesAction, SIGNAL(triggered()), this, SLOT(deleteAllProfiles()));
@@ -109,6 +108,15 @@ VoiceStickUI::VoiceStickUI(const QStringList& phonemNames, QWidget *parent)
     connect(m_deleteProfileButton, SIGNAL(clicked()), this, SLOT(deleteProfile()));
     connect(m_testPushButton, SIGNAL(clicked()), this, SLOT(test()));
     connect(m_runPushButton, SIGNAL(clicked()), this, SLOT(run()));
+
+    //User chooses profile
+    connect(m_profileComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(profileSelected(int)));
+
+    //User changes phonem's QKeySequence
+    for(QKeySequenceEdit* field : m_phonemEdits)
+    {
+        connect(field, SIGNAL(editingFinished()), this, SLOT(phonemKeySequenceModified()));
+    }
 }
 
 VoiceStickUI::~VoiceStickUI()
@@ -221,11 +229,6 @@ void VoiceStickUI::undoAll()
     comingSoonInfoPopup();
 }
 
-void VoiceStickUI::profileSelected(int index)
-{
-    comingSoonInfoPopup();
-}
-
 void VoiceStickUI::newProfile()
 {
     comingSoonInfoPopup();
@@ -262,6 +265,16 @@ void VoiceStickUI::test()
 }
 
 void VoiceStickUI::run()
+{
+    comingSoonInfoPopup();
+}
+
+void VoiceStickUI::profileSelected(int index)
+{
+    comingSoonInfoPopup();
+}
+
+void VoiceStickUI::phonemKeySequenceModified()
 {
     comingSoonInfoPopup();
 }
