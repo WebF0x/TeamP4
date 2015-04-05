@@ -36,7 +36,7 @@ void VoiceStick::updatePhonemKeySequences()
     }
     else
     {
-        setPhonemKeySequences({numberOfPhonems(),QKeySequence()});
+        setPhonemKeySequences( QVector<QKeySequence>(numberOfPhonems(), QKeySequence()) );
     }
 }
 
