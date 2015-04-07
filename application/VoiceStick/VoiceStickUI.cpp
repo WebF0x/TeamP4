@@ -117,6 +117,27 @@ VoiceStickUI::VoiceStickUI(const QStringList& phonemNames, QWidget *parent)
     {
         connect(field, SIGNAL(editingFinished()), this, SLOT(phonemKeySequenceModified()));
     }
+
+    //Keyboard shortcuts for menu actions
+    m_openAction->setShortcut(QKeySequence::Open);
+    m_saveAction->setShortcut(QKeySequence::Save);
+    m_saveAsAction->setShortcut(QKeySequence::SaveAs);
+    m_exitAction->setShortcut(QKeySequence::Quit);
+
+    m_undoAction->setShortcut(QKeySequence::Undo);
+    m_redoAction->setShortcut(QKeySequence::Redo);
+
+    m_newProfileAction->setShortcut(QKeySequence::New);
+    m_deleteProfileAction->setShortcut(QKeySequence::Delete);
+
+    m_userManualAction->setShortcut(QKeySequence::HelpContents);
+    m_aboutVoiceStickAction->setShortcut(QKeySequence::WhatsThis);
+
+    //Make buttons pressable by pressing "enter"
+    m_newProfileButton->setAutoDefault(true);
+    m_deleteProfileButton->setAutoDefault(true);
+    m_testPushButton->setAutoDefault(true);
+    m_runPushButton->setAutoDefault(true);
 }
 
 VoiceStickUI::~VoiceStickUI()
