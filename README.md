@@ -1,7 +1,16 @@
-# Team P4
+# VoiceStick
+Send keyboard inputs to any application via voice control.
 
+### Screenshot:
+![Screenshot of the application](/screenshotsWindows7/EditingShortcuts.png "Screenshot of the application")
+
+### Credits:
 Université de Sherbrooke
 
-Session 2 Génie Élec et Info
+Département de génie électrique et de génie informatique
 
-Groupe de Projet P4
+Les Droides Barbus (project group P4)
+
+Emeri Allard, Sébastien Brunelle-Jestin, Paul Cuerrier, Arnaud Desrosiers, Maxime Dupuis, Pascal Huard, Adam Létourneau, Alex Maisonneuve, Marc-Antoine Poulin, Philippe Vallée-Lefebvre
+
+2nd trimester project, winter 2015
