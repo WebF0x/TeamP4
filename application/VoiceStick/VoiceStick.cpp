@@ -2,7 +2,7 @@
 
 VoiceStick::VoiceStick(const QStringList& phonemNames, QWidget *parent) : VoiceStickUI(phonemNames, parent)
 {
-
+    statusBar()->showMessage("Welcome");
 }
 
 QMessageBox::StandardButton VoiceStick::maybeSave()
@@ -101,6 +101,8 @@ void VoiceStick::newProfile()
         selectProfile(m_profiles.size()-1);
 
         m_isModified = true;
+
+        statusBar()->showMessage("Profile created: " + title);
     }
 }
 
@@ -119,6 +121,8 @@ void VoiceStick::deleteProfile()
 
     if(choice == QMessageBox::Cancel) return;
 
+    statusBar()->showMessage("Profile deleted: " + m_profiles.at(currentProfileIndex()).getTitle());
+
     //Delete profile
     m_profiles.remove(currentProfileIndex());
     updateUI();
@@ -133,7 +137,7 @@ void VoiceStick::deleteAllProfiles()
     QMessageBox::StandardButton choice = QMessageBox::warning
             (this,
              "Delete all profiles",
-             "Are you sure you want to delete all profiles?",
+             "Are you sure you want to delete all " + QString::number(m_profiles.size()) + " profiles?",
              QMessageBox::Yes | QMessageBox::Cancel,
              QMessageBox::Yes);
 
@@ -144,6 +148,8 @@ void VoiceStick::deleteAllProfiles()
     updateUI();
 
     m_isModified = true;
+
+    statusBar()->showMessage("All profiles deleted");
 }
 
 void VoiceStick::aboutQt()
@@ -212,6 +218,7 @@ bool VoiceStick::saveAs(const QString& fileName)
         }
 
         m_isModified = false;
+        statusBar()->showMessage("Profiles saved");
 
         return true;
     }
@@ -278,12 +285,16 @@ void VoiceStick::open()
         updateUI();
 
         m_isModified = false;
+        statusBar()->showMessage("Opened successfully");
     }
 }
 
 void VoiceStick::profileSelected(int index)
 {
     updatePhonemKeySequences();
+
+    if(index >= 0)
+        statusBar()->showMessage("Profile selected: " + m_profiles.at(index).getTitle());
 }
 
 void VoiceStick::phonemKeySequenceModified()
@@ -295,4 +306,6 @@ void VoiceStick::phonemKeySequenceModified()
 
     currentProfile.setKeySequences(keySequences);
     m_isModified = true;
+
+    statusBar()->showMessage("Key sequence modified");
 }
