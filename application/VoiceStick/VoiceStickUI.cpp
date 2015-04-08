@@ -6,20 +6,20 @@ VoiceStickUI::VoiceStickUI(const QStringList& phonemNames, QWidget *parent)
 {
     //Init widgets
     m_menuBar = new QMenuBar(this);
-        m_fileMenu = new QMenu("File", this);
+        m_fileMenu = new QMenu("&File", this);
             m_openAction                = new QAction("Open...", this);
             m_saveAction                = new QAction("Save", this);
             m_saveAsAction              = new QAction("Save As...", this);
             m_exitAction                = new QAction("Exit", this);
-        m_editMenu= new QMenu("Edit", this);
+        m_editMenu= new QMenu("&Edit", this);
             m_undoAction                = new QAction("Undo", this);
             m_redoAction                = new QAction("Redo", this);
             m_undoAllAction             = new QAction("Undo All...", this);
-        m_profileMenu= new QMenu("Profile", this);
+        m_profileMenu= new QMenu("&Profile", this);
             m_newProfileAction          = new QAction("New Profile...", this);
             m_deleteProfileAction       = new QAction("Delete Profile...", this);
             m_deleteAllProfilesAction   = new QAction("Delete All Profiles...", this);
-        m_helpMenu= new QMenu("Help", this);
+        m_helpMenu= new QMenu("&Help", this);
             m_userManualAction          = new QAction("User Manual...", this);
             m_aboutVoiceStickAction     = new QAction("About VoiceStick...", this);
             m_aboutQtAction             = new QAction("About Qt...", this);
