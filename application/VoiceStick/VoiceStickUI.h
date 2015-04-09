@@ -1,3 +1,16 @@
+/*
+ * VoiceStickUI.h
+ * Interface for VoiceStick application.
+ * This is an empty shell. Another class must inherit from VoiceStickUI to implement its slots.
+ * Creates the window, menus, buttons and others widgets.
+ * Connects every actions with the appropriate slots.
+ * By default the action shows a message that says "Coming soon"
+ * Author: alle2004,dupm2216,leta1602,maia2604,poum2319,valp2602
+ * Date: Hiver 2015
+ * Copyright (c) 2015   Département de génie électrique et génie informatique
+ *                       Université de Sherbrooke
+*/
+
 #ifndef VOICESTICKUI_H
 #define VOICESTICKUI_H
 
@@ -77,7 +90,7 @@ public slots:
     virtual void phonemKeySequenceModified();
 
 private:
-    //Default message
+    //Shows a dialog windows with a default message for unimplemented slots
     void comingSoonInfoPopup();
 
     //Widgets

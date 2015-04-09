@@ -1,3 +1,14 @@
+/*
+ * VoiceStick.cpp
+ * VoiceStick is an application to map phonems to a specific key sequence.
+ * It manages Profile creations, deletions and modifications, saving, loading and more.
+ * VoiceStick implements the slots of VoiceStickUI from which it inherits.
+ * Author: alle2004,dupm2216,leta1602,maia2604,poum2319,valp2602
+ * Date: Hiver 2015
+ * Copyright (c) 2015   Département de génie électrique et génie informatique
+ *                       Université de Sherbrooke
+*/
+
 #include "VoiceStick.h"
 
 VoiceStick::VoiceStick(const QStringList& phonemNames, QWidget *parent) : VoiceStickUI(phonemNames, parent)

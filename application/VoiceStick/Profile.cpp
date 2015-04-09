@@ -1,3 +1,12 @@
+/*
+ * Profile.cpp
+ * A Profile contains a title and QKeySequence's
+ * Author: alle2004,dupm2216,leta1602,maia2604,poum2319,valp2602
+ * Date: Hiver 2015
+ * Copyright (c) 2015   Département de génie électrique et génie informatique
+ *                       Université de Sherbrooke
+*/
+
 #include "Profile.h"
 using namespace std;
 
