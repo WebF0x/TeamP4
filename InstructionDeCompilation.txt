@@ -1,0 +1,10 @@
+Pour travailler sur le code au labo de la fac:
+
+Visual Studio 2013:
+	-Dans le répertoire où le .pro se trouve, taper en ligne de commande:
+		qmake.exe -spec win32-msvc2013 -tp vc
+	-Ouvrir le .vcxproj généré dans Visual Studio
+
+Qt Creator (Community):
+	-Ouvrir "Qt Creator (Community)"
+	-Ouvrir projet... -> ouvrir le fichier .pro
