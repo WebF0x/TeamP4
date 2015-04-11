@@ -24,7 +24,6 @@ enum Registre {SW=8, BTN=9, LD=10, AN0=11, AN1=12, AN2=13, AN3=14};
 class CommunicationFPGA {
 public:
     CommunicationFPGA();
-	~CommunicationFPGA();
 
 	bool lireRegistre(int registre, int &valeur);
 	bool ecrireRegistre(int registre, int valeur);
