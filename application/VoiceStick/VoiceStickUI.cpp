@@ -360,13 +360,12 @@ void VoiceStickUI::testTriggered()
 	if (m_isTesting)
 	{
 		m_testPushButton->setText("Stop");
+		test();
 	}
 	else 
 	{
 		m_testPushButton->setText("Test");
 	}
-
-	test();
 }
 
 void VoiceStickUI::runTriggered()
@@ -379,14 +378,14 @@ void VoiceStickUI::runTriggered()
 	{
 		m_runPushButton->setText("Stop");
 		running->setStyleSheet("QPushButton{background-color : green};");
+
+		run();
 	}
 	else
 	{
 		m_runPushButton->setText("Run");
 		running->setStyleSheet("QPushButton{background-color : red};");
 	}
-
-	run();
 }
 
 void VoiceStickUI::run()
