@@ -25,7 +25,7 @@ class VoiceStick : public VoiceStickUI
     Q_OBJECT
 
 public:
-    VoiceStick(const QStringList& phonemNames, QWidget *parent = 0);
+    VoiceStick (QWidget *parent = 0);
 
     //Saves the profiles in a file
     //fileName: path of the file

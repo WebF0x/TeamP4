@@ -11,7 +11,7 @@
 
 #include "VoiceStick.h"
 
-VoiceStick::VoiceStick(const QStringList& phonemNames, QWidget *parent) : VoiceStickUI(phonemNames, parent)
+VoiceStick::VoiceStick(QWidget *parent) : VoiceStickUI(parent)
 {
     statusBar()->showMessage("Welcome");
 }
@@ -182,19 +182,26 @@ bool VoiceStick::save()
 
 bool VoiceStick::saveAs()
 {
-    QString fileName(QFileDialog::getSaveFileName());
-
-    bool saveSuccessful = saveAs(fileName);
-
-    if(!saveSuccessful)
-    {
-        QMessageBox::warning
-                (this,
-                 "Save failed",
-                 "Cannot open file.",
-                 QMessageBox::Ok );
-    }
-
+	QFileDialog dlg;
+    QString fileName;
+	bool saveSuccessful = 0;
+    
+	if (dlg.exec()){
+		fileName = dlg.selectedFiles().at(0);
+		saveSuccessful = saveAs(fileName);
+		if (!saveSuccessful)
+		{
+			QMessageBox::warning
+				(this,
+				"Save failed",
+				"Cannot open file.",
+				QMessageBox::Ok);
+		}
+	}
+	else{
+		//user hit cancel
+	}
+	
     return saveSuccessful;
 }
 
@@ -204,7 +211,7 @@ bool VoiceStick::saveAs(const QString& fileName)
 
     QFile file(fileName);   //Closed by destructor
 
-    if(!file.open( QIODevice::WriteOnly ))  //Can't open file
+    if(!file.open(QIODevice::WriteOnly))  //Can't open file
     {
         return false;
     }

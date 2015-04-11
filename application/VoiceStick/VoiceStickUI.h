@@ -34,38 +34,79 @@ class VoiceStickUI : public QMainWindow
 {
     Q_OBJECT
 
+private:
+	QStringList *phonemNames;
+	QIcon myIcon;
+	QFont myFont;
+	QPushButton *running;
+	bool isRunning;
+	int windowWidth;
+	int windowHeight;
+	//composantes du menu
+	QMenuBar* m_menuBar;
+	QMenu* m_fileMenu;
+	QMenu* m_editMenu;
+	QMenu* m_profileMenu;
+	QMenu* m_helpMenu;
+
+	//Sous-menus
+	QAction* m_openAction;
+	QAction* m_saveAction;
+	QAction* m_saveAsAction;
+	QAction* m_exitAction;
+	QAction* m_undoAction;
+	QAction* m_redoAction;
+	QAction* m_undoAllAction;
+	QAction* m_newProfileAction;
+	QAction* m_deleteProfileAction;
+	QAction* m_deleteAllProfilesAction;
+	QAction* m_userManualAction;
+	QAction* m_aboutVoiceStickAction;
+	QAction* m_aboutQtAction;
+
+	//Widgets principaux
+	QWidget* m_mainWidget;
+	QComboBox* m_profileComboBox;
+	QPushButton* m_newProfileButton;
+	QPushButton* m_deleteProfileButton;
+	QPushButton* m_testPushButton;
+	QPushButton* m_runPushButton;
+
+	//AUTRES WIDGETS	
+	QVector<QLabel*> m_phonemLabels;
+	QVector<QKeySequenceEdit*> m_phonemEdits;
+	QStatusBar* m_statusBar;
+
+	//layouts
+	QGroupBox* m_phonemsGroupBox;
+	QGroupBox* m_emptySpacerBox;
+	QGroupBox* m_profileGroupBox;
+	QVBoxLayout* m_mainVBoxLayout;
+	QHBoxLayout* m_profileHBoxLayout;
+	QFormLayout* m_phonemsFormLayout;
+
+	//fonctions de structure
+	void createMenu();
+	void createTop();
+	void createMid();
+	void createBot();
+	void comingSoonInfoPopup();
+	
 public:
-    VoiceStickUI(const QStringList& phonemNames, QWidget *parent = 0);
+    VoiceStickUI(QWidget *parent = 0);
     virtual ~VoiceStickUI();
 
-    //Returns the index of the profile in the combo box
-    //Returns -1 if the combo box is empty
-    int currentProfileIndex() const;
+    int currentProfileIndex() const;//Returns the index of the profile in the combo box
+    void setProfileOptions(const QStringList& profileNames);//Set the options in the profiles QComboBox
+	void selectProfile(int n);//Selects n-th profile
 
-    //Set the options in the profiles QComboBox
-    void setProfileOptions(const QStringList& profileNames);
+	QKeySequence getPhonemKeySequence(int n) const;//Returns the QKeySequence associated with the n-th phonem
+    QVector<QKeySequence> getPhonemKeySequences() const;//Returns the QKeySequence's associated with the phonems
+	void setPhonemKeySequences(QVector<QKeySequence> keySeqs); //Sets the phonems' QKeySequence's
+	int numberOfPhonems() const;//Returns the number of phonems
 
-    //Returns the QKeySequence associated with the n-th phonem
-    //n: index on the phonem between 0 and (numberOfPhonems - 1)
-    QKeySequence getPhonemKeySequence(int n) const;
-
-    //Returns the QKeySequence's associated with the phonems
-    QVector<QKeySequence> getPhonemKeySequences() const;
-
-    //Sets the phonems' QKeySequence's
-    void setPhonemKeySequences(QVector<QKeySequence> keySeqs);
-
-    //Highlights the QKeySequenceEdit associated with the n-th phonem
-    void highlight(int n);
-
-    //Unhighlights the QKeySequenceEdit associated with the n-th phonem
-    void unhighlight(int n);
-
-    //Returns the number of phonems
-    int numberOfPhonems() const;
-
-    //Selects n-th profile
-    void selectProfile(int n);
+    void highlight(int n);//Highlights the QKeySequenceEdit associated with the n-th phonem
+    void unhighlight(int n);//Unhighlights the QKeySequenceEdit associated with the n-th phonem
 
 public slots:
     //Menu actions
@@ -81,55 +122,13 @@ public slots:
     virtual void userManual();
     virtual void aboutVoiceStick();
     virtual void aboutQt();
+
     //Buttons
     virtual void test();
     virtual void run();
-    //User chooses profile
+
     virtual void profileSelected(int index);
-    //User changes a phonem's QKeySequence
     virtual void phonemKeySequenceModified();
-
-private:
-    //Shows a dialog windows with a default message for unimplemented slots
-    void comingSoonInfoPopup();
-
-    //Widgets
-    QMenuBar* m_menuBar;
-        QMenu* m_fileMenu;
-            QAction* m_openAction;
-            QAction* m_saveAction;
-            QAction* m_saveAsAction;
-            QAction* m_exitAction;
-        QMenu* m_editMenu;
-            QAction* m_undoAction;
-            QAction* m_redoAction;
-            QAction* m_undoAllAction;
-        QMenu* m_profileMenu;
-            QAction* m_newProfileAction;
-            QAction* m_deleteProfileAction;
-            QAction* m_deleteAllProfilesAction;
-        QMenu* m_helpMenu;
-            QAction* m_userManualAction;
-            QAction* m_aboutVoiceStickAction;
-            QAction* m_aboutQtAction;
-
-    QWidget* m_mainWidget;
-        QGroupBox* m_profileGroupBox;
-            QComboBox* m_profileComboBox;
-            QPushButton* m_newProfileButton;
-            QPushButton* m_deleteProfileButton;
-        QGroupBox* m_phonemsGroupBox;
-            QVector<QLabel*> m_phonemLabels;
-            QVector<QKeySequenceEdit*> m_phonemEdits;
-        QPushButton* m_testPushButton;
-        QPushButton* m_runPushButton;
-
-    QStatusBar* m_statusBar;
-
-    //Layouts
-    QVBoxLayout* m_mainVBoxLayout;
-        QHBoxLayout* m_profileHBoxLayout;
-        QFormLayout* m_phonemsFormLayout;
 };
 
 #endif // VOICESTICKUI_H
