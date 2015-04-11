@@ -1,2 +1,5 @@
 Debug
 *.sln
+*.sdf
+*.vcxproj*
+*.opensdf
