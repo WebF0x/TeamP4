@@ -9,6 +9,12 @@
 
 #include "ModuleFPGA.h"
 
+ModuleFPGA::~ModuleFPGA()
+{
+	m_keepGoing = false;
+	wait(5000);	//Wait max 5 seconds or until the thread is finished executing
+}
+
 void ModuleFPGA::run()
 {
 	int val = 0;	//holds the value of the register read
@@ -27,7 +33,7 @@ void ModuleFPGA::run()
 				return;
 			}
 
-		}while (val == oldVal);
+		}while (val == oldVal && m_keepGoing);
 
 		switch (val)
 		{

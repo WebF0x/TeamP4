@@ -18,6 +18,9 @@ class ModuleFPGA : public QThread
 {
 	Q_OBJECT
 
+public:
+	~ModuleFPGA();
+
 public slots:
 	//Stop reading the FPGA
 	void pause();
