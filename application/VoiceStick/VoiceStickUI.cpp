@@ -21,7 +21,6 @@ VoiceStickUI::VoiceStickUI(QWidget *parent) : QMainWindow(parent)
 	phonemNames = new QStringList({ "a (fat)", "i (free)", "u (bed)", "whistle" });
 	myIcon.addFile("logo.jpg");
 	QDesktopWidget dw;
-	isRunning = 0;
 
 	myFont.setPointSize(14);
 	myFont.setStyleStrategy(QFont::ForceOutline);
@@ -42,7 +41,7 @@ VoiceStickUI::VoiceStickUI(QWidget *parent) : QMainWindow(parent)
 	running = new QPushButton();
 	running->setStyleSheet("QPushButton {background-color : red;}");
 	m_statusBar->addPermanentWidget(running);
-	connect(running, SIGNAL(clicked()), this, SLOT(run()));
+	connect(running, SIGNAL(clicked()), this, SLOT(runTriggered()));
 	setWindowIcon(myIcon);
 	setFixedSize(windowHeight, windowHeight);
 }
@@ -206,8 +205,8 @@ void VoiceStickUI::createBot(){
 	m_mainVBoxLayout->addWidget(m_testPushButton);
 	m_mainVBoxLayout->addWidget(m_runPushButton);
 
-	connect(m_testPushButton, SIGNAL(clicked()), this, SLOT(test()));
-	connect(m_runPushButton, SIGNAL(clicked()), this, SLOT(run()));
+	connect(m_testPushButton, SIGNAL(clicked()), this, SLOT(testTriggered()));
+	connect(m_runPushButton, SIGNAL(clicked()), this, SLOT(runTriggered()));
 
 	m_testPushButton->setAutoDefault(true);
 	m_runPushButton->setAutoDefault(true);
@@ -352,21 +351,52 @@ void VoiceStickUI::aboutQt()
 	comingSoonInfoPopup();
 }
 
-void VoiceStickUI::test()
+void VoiceStickUI::testTriggered()
 {
-	comingSoonInfoPopup();
+	//Toggle
+	m_isTesting = !m_isTesting;
+
+	//Update button text
+	if (m_isTesting)
+	{
+		m_testPushButton->setText("Stop");
+	}
+	else 
+	{
+		m_testPushButton->setText("Test");
+	}
+
+	test();
+}
+
+void VoiceStickUI::runTriggered()
+{
+	//Toggle
+	m_isRunning = !m_isRunning;
+
+	//Update button text
+	if (m_isRunning)
+	{
+		m_runPushButton->setText("Stop");
+		running->setStyleSheet("QPushButton{background-color : green};");
+	}
+	else
+	{
+		m_runPushButton->setText("Run");
+		running->setStyleSheet("QPushButton{background-color : red};");
+	}
+
+	run();
 }
 
 void VoiceStickUI::run()
 {
-	if (isRunning == 0){
-		isRunning = 1;
-		running->setStyleSheet("QPushButton{background-color : green};");
-	}
-	else {
-		isRunning = 0;
-		running->setStyleSheet("QPushButton{background-color : red};");
-	}
+	comingSoonInfoPopup();
+}
+
+void VoiceStickUI::test()
+{
+	comingSoonInfoPopup();
 }
 
 void VoiceStickUI::profileSelected(int index)

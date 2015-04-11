@@ -39,7 +39,8 @@ private:
 	QIcon myIcon;
 	QFont myFont;
 	QPushButton *running;
-	bool isRunning;
+	bool m_isRunning = false;
+	bool m_isTesting = false;
 	int windowWidth;
 	int windowHeight;
 	//composantes du menu
@@ -96,6 +97,9 @@ public:
     VoiceStickUI(QWidget *parent = 0);
     virtual ~VoiceStickUI();
 
+	bool isRunning() { return m_isRunning; }
+	bool isTesting() { return m_isTesting; }
+
     int currentProfileIndex() const;//Returns the index of the profile in the combo box
     void setProfileOptions(const QStringList& profileNames);//Set the options in the profiles QComboBox
 	void selectProfile(int n);//Selects n-th profile
@@ -126,6 +130,9 @@ public slots:
     //Buttons
     virtual void test();
     virtual void run();
+
+	virtual void testTriggered();
+	virtual void runTriggered();
 
     virtual void profileSelected(int index);
     virtual void phonemKeySequenceModified();
