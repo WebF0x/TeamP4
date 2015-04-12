@@ -336,7 +336,8 @@ void VoiceStick::phonemDetected(int n)
 	{
 		simulateKeySequence(getPhonemKeySequence(n));
 	}
-	else if (isTesting())
+	
+	if (isTesting() || isRunning())
 	{
 		for (int i = 0; i < numberOfPhonems(); ++i)
 		{
@@ -352,10 +353,13 @@ void VoiceStick::test()
 	if (isTesting())
 	{
 		m_fpga.resume();
+		statusBar()->showMessage("Test started");
+
 	}
 	else
 	{
 		m_fpga.pause();
+		statusBar()->showMessage("Test stopped");
 	}
 }
 
@@ -364,10 +368,12 @@ void VoiceStick::run()
 	if (isRunning())
 	{
 		m_fpga.resume();
+		statusBar()->showMessage("Key simulation started");
 	}
 	else
 	{
 		m_fpga.pause();
+		statusBar()->showMessage("Key simulation stopped");
 	}
 }
 

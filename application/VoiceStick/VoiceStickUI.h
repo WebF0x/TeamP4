@@ -38,7 +38,6 @@ private:
 	QStringList *phonemNames;
 	QIcon myIcon;
 	QFont myFont;
-	QPushButton *running;
 	bool m_isRunning = false;
 	bool m_isTesting = false;
 	int windowWidth;

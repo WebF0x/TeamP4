@@ -38,10 +38,7 @@ VoiceStickUI::VoiceStickUI(QWidget *parent) : QMainWindow(parent)
 	setMenuBar(m_menuBar);
 	setCentralWidget(m_mainWidget);
 	setStatusBar(m_statusBar);
-	running = new QPushButton();
-	running->setStyleSheet("QPushButton {background-color : red;}");
-	m_statusBar->addPermanentWidget(running);
-	connect(running, SIGNAL(clicked()), this, SLOT(runTriggered()));
+
 	setWindowIcon(myIcon);
 	setFixedSize(windowHeight, windowHeight);
 }
@@ -332,13 +329,11 @@ void VoiceStickUI::testTriggered()
 	{
 		m_testPushButton->setText("Stop");
 		m_runPushButton->setEnabled(false);
-		running->setEnabled(false);
 	}
 	else 
 	{
 		m_testPushButton->setText("Test");
 		m_runPushButton->setEnabled(true);
-		running->setEnabled(true);
 	}
 
 	test();
@@ -353,13 +348,11 @@ void VoiceStickUI::runTriggered()
 	if (m_isRunning)
 	{
 		m_runPushButton->setText("Stop");
-		running->setStyleSheet("QPushButton{background-color : green};");
 		m_testPushButton->setEnabled(false);
 	}
 	else
 	{
 		m_runPushButton->setText("Run");
-		running->setStyleSheet("QPushButton{background-color : red};");
 		m_testPushButton->setEnabled(true);
 	}
 
