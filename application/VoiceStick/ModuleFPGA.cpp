@@ -1,6 +1,6 @@
 /*
 * ModuleFPGA.cpp
-* [PLACEHOLDER DESCRIPTION]
+* ModuleFPGA is used to read the FPGA and emit a signal everytime the state of the FPGA changes
 * Author: alle2004,dupm2216,leta1602,maia2604,poum2319,valp2602
 * Date: Hiver 2015
 * Copyright (c) 2015   Département de génie électrique et génie informatique
