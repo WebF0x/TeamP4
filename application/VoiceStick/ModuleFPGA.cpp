@@ -34,7 +34,7 @@ void ModuleFPGA::run()
 			do
 			{
 				//Check for errors
-				if (!m_fpga->estOk() || !m_fpga->lireRegistre(BTN, val))
+				if (!m_fpga.estOk() || !m_fpga.lireRegistre(BTN, val))
 				{
 					emit fpgaError();
 					m_needToReadFPGA = false;
