@@ -95,6 +95,11 @@ private:
     //Update the phonem fields of the selected profile
     void updatePhonemKeySequences();
 
+	//Simulate a key stroke on the program currently on focus
+	//This needs to be redesigned because we can only simulate keys associated with a character (i.e. no F1..F12, delete, backspace, etc keys)
+	//WINDOWS ONLY!
+	void simulateKeyStroke(char key);
+
     QVector<Profile> m_profiles;
     QString m_currentFileName;
     bool m_isModified = false;   //True if closing the program will lose unsaved changes

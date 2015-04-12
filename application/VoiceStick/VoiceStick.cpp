@@ -365,3 +365,34 @@ void VoiceStick::run()
 		m_fpga.pause();
 	}
 }
+
+void VoiceStick::simulateKeyStroke(char key)
+{
+	//Init input structure
+	INPUT input;
+	memset(&input, 0, sizeof(input));
+
+	//Simulate key stroke
+	//VkKeyScan(' ') = Translates a character to the corresponding virtual-key code and shift state for the current keyboard.
+	//type can be:INPUT_MOUSE 0, INPUT_KEYBOARD 1 , INPUT_HARDWARE 2
+	input.type = INPUT_KEYBOARD;		//INPUT_KEYBOARD is a keyboard event, use the "ki" structure of the union
+	input.ki.wVk = VkKeyScan(key);	//ki = KeyBoard INPUT
+	//Membre : wVk, wScan et dwFlags
+	//VK_UP							//wVk = Is a virtual key code, the code must be a value in the range 1 to 254 (ASCII)
+	//VK_DOWN						//dwFlags = Specifies various aspects of a keystroke, combination of certain value : KEYEVENTF_EXTENDEDKEY, KEYEVENTF_KEYUP, KEYEVENTF_SCANCODE KEYEVENTF_UNICODE
+	//VK_RIGHT						//KEYEVENTF_EXTENDEDKEY	= 
+	//VK_LEFT						//KEYEVENTF_KEYUP = if specified, key is released, if not, key is not released
+	//wVk = Is a virtual key code, the code must be a value in the range 1 to 254 (ASCII)
+	//dwFlags = Specifies various aspects of a keystroke, combination of certain value : KEYEVENTF_EXTENDEDKEY, KEYEVENTF_KEYUP, KEYEVENTF_SCANCODE KEYEVENTF_UNICODE
+	//KEYEVENTF_EXTENDEDKEY	= 
+	//KEYEVENTF_KEYUP = if specified, key is released, if not, key is not released
+	//KEYEVENTF_SCANCODE
+	//KEYEVENTF_UNICODE
+
+
+	//Sleep(100);				//Pause jusqu a ce que le temps a passer et poursuit
+
+	SendInput(1, &input, sizeof(INPUT));	//SendInput ( UINT, LPINPUT, int cbSize)
+	input.ki.dwFlags = KEYEVENTF_KEYUP;
+	SendInput(1, &input, sizeof(INPUT));
+}

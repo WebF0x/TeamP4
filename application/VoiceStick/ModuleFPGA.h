@@ -37,15 +37,9 @@ private:
 	bool m_needToReadFPGA = false;	//True if we need to read the FPGA
 	bool m_timeToDie = false;	//True if thread must stop
 
-	//Check for buttons pressed on the FPGA and emits signals accordingly
+	//Check for buttons pressed on the FPGA and emits phonemDetected(int) signals accordingly
 	//If there is an FPGA error, emit fpgaError() and pause
-	//Make sure to "pause" ModuleFPGA before quitting your program, or else the FPGA will freeze and need to be reset
 	void run();
-
-	//Simulate a key stroke on the program currently on focus
-	//This needs to be redesigned because we can only simulate keys associated with a character (i.e. no F1..F12, delete, backspace, etc keys)
-	//WINDOWS ONLY!
-	void simulateKeyStroke(char key); //Move to VoiceStick sometimes
 };
 
 #endif //MODULE_FPGA_H
