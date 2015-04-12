@@ -40,8 +40,6 @@ private:
 	QFont myFont;
 	bool m_isRunning = false;
 	bool m_isTesting = false;
-	int windowWidth;
-	int windowHeight;
 	//composantes du menu
 	QMenuBar* m_menuBar;
 	QMenu* m_fileMenu;

@@ -25,8 +25,8 @@ VoiceStickUI::VoiceStickUI(QWidget *parent) : QMainWindow(parent)
 	myFont.setPointSize(14);
 	myFont.setStyleStrategy(QFont::ForceOutline);
 
-	windowWidth = dw.width()*0.5;
-	windowHeight = dw.height()*0.6;
+	//windowWidth = dw.width()*0.5;
+	//windowHeight = dw.height()*0.6;
 
 	//Creation de l'interface
 	createMenu();
@@ -40,7 +40,7 @@ VoiceStickUI::VoiceStickUI(QWidget *parent) : QMainWindow(parent)
 	setStatusBar(m_statusBar);
 
 	setWindowIcon(myIcon);
-	setFixedSize(windowHeight, windowHeight);
+	//setFixedSize(windowHeight, windowHeight);
 }
 
 VoiceStickUI::~VoiceStickUI()
@@ -115,7 +115,7 @@ void VoiceStickUI::createMenu(){
 void VoiceStickUI::createTop(){
 	m_mainWidget = new QWidget(this);
 	QPixmap bckgrnd("background.jpg");
-	bckgrnd = bckgrnd.scaled(QSize(windowHeight, windowHeight), Qt::IgnoreAspectRatio);
+	bckgrnd = bckgrnd.scaled(QSize(width(), height()), Qt::IgnoreAspectRatio);
 	QPalette palette;
 	palette.setBrush(QPalette::Background, bckgrnd);
 	this->setPalette(palette);
