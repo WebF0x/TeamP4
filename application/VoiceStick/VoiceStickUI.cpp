@@ -61,9 +61,6 @@ void VoiceStickUI::createMenu(){
 	m_saveAsAction = new QAction("Save As...", this);
 	m_exitAction = new QAction("Exit", this);
 	m_editMenu = new QMenu("&Edit", this);
-	m_undoAction = new QAction("Undo", this);
-	m_redoAction = new QAction("Redo", this);
-	m_undoAllAction = new QAction("Undo All...", this);
 	m_profileMenu = new QMenu("&Profile", this);
 	m_newProfileAction = new QAction("New Profile...", this);
 	m_deleteProfileAction = new QAction("Delete Profile...", this);
@@ -82,15 +79,10 @@ void VoiceStickUI::createMenu(){
 	m_fileMenu->addSeparator();
 	m_fileMenu->addAction(m_exitAction);
 	m_menuBar->addMenu(m_editMenu);
-	m_editMenu->addAction(m_undoAction);
-	m_editMenu->addAction(m_redoAction);
+	m_editMenu->addAction(m_newProfileAction);
 	m_editMenu->addSeparator();
-	m_editMenu->addAction(m_undoAllAction);
-	m_menuBar->addMenu(m_profileMenu);
-	m_profileMenu->addAction(m_newProfileAction);
-	m_profileMenu->addSeparator();
-	m_profileMenu->addAction(m_deleteProfileAction);
-	m_profileMenu->addAction(m_deleteAllProfilesAction);
+	m_editMenu->addAction(m_deleteProfileAction);
+	m_editMenu->addAction(m_deleteAllProfilesAction);
 	m_menuBar->addMenu(m_helpMenu);
 	m_helpMenu->addAction(m_userManualAction);
 	m_helpMenu->addSeparator();
@@ -102,9 +94,6 @@ void VoiceStickUI::createMenu(){
 	connect(m_saveAction, SIGNAL(triggered()), this, SLOT(save()));
 	connect(m_saveAsAction, SIGNAL(triggered()), this, SLOT(saveAs()));
 	connect(m_exitAction, SIGNAL(triggered()), this, SLOT(close()));
-	connect(m_undoAction, SIGNAL(triggered()), this, SLOT(undo()));
-	connect(m_redoAction, SIGNAL(triggered()), this, SLOT(redo()));
-	connect(m_undoAllAction, SIGNAL(triggered()), this, SLOT(undoAll()));
 	connect(m_newProfileAction, SIGNAL(triggered()), this, SLOT(newProfile()));
 	connect(m_deleteProfileAction, SIGNAL(triggered()), this, SLOT(deleteProfile()));
 	connect(m_deleteAllProfilesAction, SIGNAL(triggered()), this, SLOT(deleteAllProfiles()));
@@ -117,9 +106,6 @@ void VoiceStickUI::createMenu(){
 	m_saveAction->setShortcut(QKeySequence::Save);
 	m_saveAsAction->setShortcut(QKeySequence::SaveAs);
 	m_exitAction->setShortcut(QKeySequence::Quit);
-
-	m_undoAction->setShortcut(QKeySequence::Undo);
-	m_redoAction->setShortcut(QKeySequence::Redo);
 
 	m_newProfileAction->setShortcut(QKeySequence::New);
 	m_deleteProfileAction->setShortcut(QKeySequence::Delete);
@@ -301,21 +287,6 @@ bool VoiceStickUI::saveAs()
 {
 	comingSoonInfoPopup();
 	return false;
-}
-
-void VoiceStickUI::undo()
-{
-	comingSoonInfoPopup();
-}
-
-void VoiceStickUI::redo()
-{
-	comingSoonInfoPopup();
-}
-
-void VoiceStickUI::undoAll()
-{
-	comingSoonInfoPopup();
 }
 
 void VoiceStickUI::newProfile()

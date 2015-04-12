@@ -55,9 +55,6 @@ private:
 	QAction* m_saveAction;
 	QAction* m_saveAsAction;
 	QAction* m_exitAction;
-	QAction* m_undoAction;
-	QAction* m_redoAction;
-	QAction* m_undoAllAction;
 	QAction* m_newProfileAction;
 	QAction* m_deleteProfileAction;
 	QAction* m_deleteAllProfilesAction;
@@ -117,9 +114,6 @@ public slots:
     virtual void open();
     virtual bool save();    //Returns true at success
     virtual bool saveAs();  //Returns true at success
-    virtual void undo();
-    virtual void redo();
-    virtual void undoAll();
     virtual void newProfile();
     virtual void deleteProfile();
     virtual void deleteAllProfiles();
