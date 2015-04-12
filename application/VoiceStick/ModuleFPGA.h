@@ -19,22 +19,23 @@ class ModuleFPGA : public QThread
 	Q_OBJECT
 
 public:
+	ModuleFPGA();
 	~ModuleFPGA();
 
 public slots:
-	//Stop reading the FPGA
-	void pause();
+	void pause();	//Pause reading FPGA
+	void resume();	//Resume reading FPGA
 		
 signals:
-	//Emitted when an FPGA error is detected
-	void fpgaError();
+	void fpgaError();//Emitted when an FPGA error is detected
 
 	//Emitted when the n-th phonem has been detected
 	void phonemDetected(int n);
 
 private:
 	CommunicationFPGA m_fpga;
-	bool m_keepGoing = true;
+	bool m_needToReadFPGA = false;	//True if we need to read the FPGA
+	bool m_timeToDie = false;	//True if thread must stop
 
 	//Check for buttons pressed on the FPGA and emits signals accordingly
 	//If there is an FPGA error, emit fpgaError() and pause

@@ -9,51 +9,61 @@
 
 #include "ModuleFPGA.h"
 
+ModuleFPGA::ModuleFPGA()
+{
+	start();
+}
+
 ModuleFPGA::~ModuleFPGA()
 {
-	m_keepGoing = false;
+	m_timeToDie = true;
+	m_needToReadFPGA = false;
 	wait(5000);	//Wait max 5 seconds or until the thread is finished executing
 }
 
 void ModuleFPGA::run()
 {
 	int val = 0;	//holds the value of the register read
-
-	while (m_keepGoing)
+	while (!m_timeToDie)
 	{
-		//Wait until a button's state changes
-		//When the do-while is over, val holds the value of the button register
-		int oldVal = val;
-		do
+		while (m_needToReadFPGA)
 		{
-			//Check for errors
-			if (!m_fpga.estOk() || !m_fpga.lireRegistre(BTN, val))
+			//Wait until a button's state changes
+			//When the do-while is over, val holds the value of the button register
+			int oldVal = val;
+			do
 			{
-				emit fpgaError();
-				return;
+				//Check for errors
+				if (!m_fpga->estOk() || !m_fpga->lireRegistre(BTN, val))
+				{
+					emit fpgaError();
+					m_needToReadFPGA = false;
+				}
+
+			} while (val == oldVal && m_needToReadFPGA);
+
+			if (!m_needToReadFPGA) break;	//Skip remaining actions if there was a problem with the FPGA
+
+			switch (val)
+			{
+			case 1:	//BTN0
+				simulateKeyStroke('1');
+				break;
+
+			case 2:	//BTN1
+				simulateKeyStroke('2');
+				break;
+
+			case 4:	//BTN2
+				simulateKeyStroke('3');
+				break;
+
+			case 8:	//BTN3
+				simulateKeyStroke('4');
+				break;
+
+			default: break; //Zero or more than one button pressed
 			}
-
-		}while (val == oldVal && m_keepGoing);
-
-		switch (val)
-		{
-		case 1:	//BTN0
-			simulateKeyStroke('1');
-			break;
-
-		case 2:	//BTN1
-			simulateKeyStroke('2');
-			break;
-
-		case 4:	//BTN2
-			simulateKeyStroke('3');
-			break;
-
-		case 8:	//BTN3
-			simulateKeyStroke('4');
-			break;
-
-		default: break; //Zero or more than one button pressed
 		}
 	}
 }
@@ -90,7 +100,12 @@ void ModuleFPGA::simulateKeyStroke(char key)
 	SendInput(1, &input, sizeof(INPUT));
 }
 
+void ModuleFPGA::resume()
+{
+	m_needToReadFPGA = true;
+}
+
 void ModuleFPGA::pause()
 {
-	m_keepGoing = false;
+	m_needToReadFPGA = false;
 }
