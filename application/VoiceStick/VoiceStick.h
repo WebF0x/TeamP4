@@ -13,7 +13,9 @@
 #define VOICESTICK_H
 
 #include "VoiceStickUI.h"
+#include "ModuleFPGA.h"
 #include "Profile.h"
+
 #include <QFileDialog>
 #include <QFile>
 #include <QString>
@@ -70,6 +72,12 @@ public slots:
     //Update the current profile to reflect the changes
     virtual void phonemKeySequenceModified();
 
+	//TODO
+	virtual void phonemDetected(int n);
+
+	virtual void test();
+	virtual void run();
+
 private:
     //Warns the user that unsaved changes might be lost and returns the user's choice:
     //Return values:
@@ -90,6 +98,7 @@ private:
     QVector<Profile> m_profiles;
     QString m_currentFileName;
     bool m_isModified = false;   //True if closing the program will lose unsaved changes
+	ModuleFPGA m_fpga;
 
     static const int MAX_PROFILE_NAME_LENGTH = 30;
 };

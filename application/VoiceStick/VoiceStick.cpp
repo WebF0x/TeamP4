@@ -14,6 +14,8 @@
 VoiceStick::VoiceStick(QWidget *parent) : VoiceStickUI(parent)
 {
     statusBar()->showMessage("Welcome");
+
+	connect(&m_fpga, SIGNAL(phonemDetected(int)), this, SLOT(phonemDetected(int)));
 }
 
 QMessageBox::StandardButton VoiceStick::maybeSave()
@@ -326,4 +328,40 @@ void VoiceStick::phonemKeySequenceModified()
     m_isModified = true;
 
     statusBar()->showMessage("Key sequence modified");
+}
+
+void VoiceStick::phonemDetected(int n)
+{
+	if (isRunning())
+	{
+		//TODO
+	}
+	else if (isTesting())
+	{
+		//TODO
+	}
+}
+
+void VoiceStick::test()
+{
+	if (isTesting())
+	{
+		m_fpga.resume();
+	}
+	else
+	{
+		m_fpga.pause();
+	}
+}
+
+void VoiceStick::run()
+{
+	if (isRunning())
+	{
+		m_fpga.resume();
+	}
+	else
+	{
+		m_fpga.pause();
+	}
 }
