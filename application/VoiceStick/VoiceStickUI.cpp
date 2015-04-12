@@ -131,7 +131,7 @@ void VoiceStickUI::createMenu(){
 //fonction qui genere la partie du haut de l'interface principale
 void VoiceStickUI::createTop(){
 	m_mainWidget = new QWidget(this);
-	QPixmap bckgrnd("logo.jpg");
+	QPixmap bckgrnd("background.jpg");
 	bckgrnd = bckgrnd.scaled(QSize(windowHeight, windowHeight), Qt::IgnoreAspectRatio);
 	QPalette palette;
 	palette.setBrush(QPalette::Background, bckgrnd);
