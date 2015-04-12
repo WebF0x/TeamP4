@@ -338,7 +338,13 @@ void VoiceStick::phonemDetected(int n)
 	}
 	else if (isTesting())
 	{
-		//TODO
+		for (int i = 0; i < numberOfPhonems(); ++i)
+		{
+			unhighlight(i);
+		}
+
+		if (n != -1)
+		highlight(n);
 	}
 }
 

@@ -62,7 +62,9 @@ void ModuleFPGA::run()
 				emit phonemDetected(3);
 				break;
 
-			default: break; //Zero or more than one button pressed
+			default: 
+				emit phonemDetected(-1);
+				break; //Zero or more than one button pressed
 			}
 		}
 	}
