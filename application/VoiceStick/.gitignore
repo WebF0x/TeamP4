@@ -1,5 +1,5 @@
-./Debug
-./release
+./debug/*
+./release/*
 *.sln
 *.sdf
 *.vcxproj*
