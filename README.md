@@ -2,7 +2,7 @@
 Send keyboard inputs to any application via voice control.
 
 ### Screenshot:
-![Screenshot of the application](/screenshotsWindows7/EditingShortcuts.png "Screenshot of the application")
+![Screenshot of the application](/screenshotsWindows7/ActionTest.png "Screenshot of the application")
 
 ### Credits:
 Université de Sherbrooke
