@@ -186,22 +186,20 @@ bool VoiceStick::save()
 bool VoiceStick::saveAs()
 {
 	QFileDialog dlg;
-    QString fileName;
-	bool saveSuccessful = 0;
-    
-	if (dlg.exec()){
-		fileName = dlg.selectedFiles().at(0);
-		saveSuccessful = saveAs(fileName);
-		if (!saveSuccessful)
-		{
-			QMessageBox::warning
-				(this,
-				"Save failed",
-				"Cannot open file.",
-				QMessageBox::Ok);
-		}
+	QString fileName(QFileDialog::getSaveFileName());
+
+	bool saveSuccessful = saveAs(fileName);
+	
+	if (!saveSuccessful)
+	{
+		QMessageBox::warning
+			(this,
+			"Save failed",
+			"Cannot open file.",
+			QMessageBox::Ok);
 	}
-	else{
+	else
+	{
 		//user hit cancel
 	}
 	
