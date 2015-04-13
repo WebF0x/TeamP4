@@ -106,6 +106,8 @@ private:
 	//WINDOWS ONLY!
 	void simulateKeySequence(const QKeySequence& keySeq);
 
+	int fixedKeyCode(int keyCode);
+
 
     QVector<Profile> m_profiles;
     QString m_currentFileName;

@@ -414,13 +414,77 @@ void VoiceStick::simulateKeySequence(const QKeySequence& keySeq)
 		for (const QString& key : keys)
 		{
 			int keyCode = QKeySequence(key)[0];
-			simulatePress(keyCode);
+			simulatePress(fixedKeyCode(keyCode));
 		}
+
+		Sleep(100);
 
 		for (const QString& key : keys)
 		{
 			int keyCode = QKeySequence(key)[0];
-			simulateRelease(keyCode);
+			simulateRelease(fixedKeyCode(keyCode));
 		}
+	}
+}
+#include <qdebug.h>
+//Key codes: https://msdn.microsoft.com/en-us/library/windows/desktop/dd375731(v=vs.85).aspx
+int VoiceStick::fixedKeyCode(int keyCode)
+{
+	qDebug() << keyCode;
+	switch (keyCode)
+	{
+	case 16777235: return VK_UP;
+	case 16777237: return VK_DOWN;
+	case 16777234: return VK_LEFT;
+	case 16777236: return VK_RIGHT;
+
+	case 16777217: return VK_TAB;
+	//Shift, Alt and Ctrl have the same code, can't make it work
+	//case 33554431: return VK_SHIFT;
+	//case 33554431: return VK_MENU;
+	//case 33554431: return VK_CONTROL;
+	case 16777224: return VK_PAUSE;
+	case 16777252: return VK_CAPITAL;
+	case 16777216: return VK_ESCAPE;
+	case 16777238: return VK_PRIOR;
+	case 16777239: return VK_NEXT;
+	case 16777233: return VK_END;
+	case 16777232: return VK_HOME;
+	case 16777222: return VK_INSERT;
+	case 16777223: return VK_DELETE;
+	case 47: return VK_DIVIDE;
+	case 42: return VK_MULTIPLY;
+	case 45: return VK_SUBTRACT;
+	//case XXXXXXX : return VK_ADD;	//Qt doesn't give us any code
+
+	//F1..12
+	case 16777264: return VK_F1;
+	case 16777265: return VK_F2;
+	case 16777266: return VK_F3;
+	case 16777267: return VK_F4;
+	case 16777268: return VK_F5;
+	case 16777269: return VK_F6;
+	case 16777270: return VK_F7;
+	case 16777271: return VK_F8;
+	case 16777272: return VK_F9;
+	case 16777273: return VK_F10;
+	case 16777274: return VK_F11;
+	case 16777275: return VK_F12;
+	case 16777276: return VK_F13;
+	case 16777277: return VK_F14;
+	case 16777278: return VK_F15;
+	case 16777279: return VK_F16;
+	case 16777280: return VK_F17;
+	case 16777281: return VK_F18;
+	case 16777282: return VK_F19;
+	case 16777283: return VK_F20;
+	case 16777284: return VK_F21;
+	case 16777285: return VK_F22;
+	case 16777286: return VK_F23;
+	case 16777287: return VK_F24;
+
+	case 16777253: return VK_NUMLOCK;
+
+	default: return keyCode;
 	}
 }
