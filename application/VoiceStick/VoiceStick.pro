@@ -18,8 +18,8 @@ HEADERS  += VoiceStickUI.h \
 	ModuleFPGA.h
  
 CONFIG(debug, debug|release) {
-	LIBS	+= CommunicationFPGA/debug/CommunicationFPGA.lib
+	LIBS	+= CommunicationFPGA/libDebug/CommunicationFPGA.lib
 	CONFIG += console
 } else {
-	LIBS	+= CommunicationFPGA/release/CommunicationFPGA.lib
+	LIBS	+= CommunicationFPGA/libRelease/CommunicationFPGA.lib
 }
