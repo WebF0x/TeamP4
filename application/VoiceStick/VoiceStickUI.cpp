@@ -12,21 +12,14 @@
  */
 
 #include "VoiceStickUI.h"
-#include <vector>
-#include <qbitmap.h>
-#include <qdesktopwidget.h>
 
 VoiceStickUI::VoiceStickUI(QWidget *parent) : QMainWindow(parent)
 {
 	phonemNames = new QStringList({ "a (fat)", "i (free)", "u (bed)", "whistle" });
 	myIcon.addFile("logo.jpg");
-	QDesktopWidget dw;
 
 	myFont.setPointSize(14);
 	myFont.setStyleStrategy(QFont::ForceOutline);
-
-	//windowWidth = dw.width()*0.5;
-	//windowHeight = dw.height()*0.6;
 
 	//Creation de l'interface
 	createMenu();
@@ -40,13 +33,16 @@ VoiceStickUI::VoiceStickUI(QWidget *parent) : QMainWindow(parent)
 	setStatusBar(m_statusBar);
 
 	setWindowIcon(myIcon);
-	//setFixedSize(windowHeight, windowHeight);
+
+	adjustSize();
+	setFixedSize(size());
+	statusBar()->setSizeGripEnabled(false);
 }
 
 VoiceStickUI::~VoiceStickUI()
 {
 	//QMainWindow will take care of deleting all of its children
-}
+}	
 
 //fonction qui genere le menu
 void VoiceStickUI::createMenu(){
@@ -123,7 +119,12 @@ void VoiceStickUI::createTop(){
 	m_profileGroupBox = new QGroupBox("Profile", this);
 	m_profileGroupBox->setStyleSheet("QGroupBox { color : white; }");
 	m_profileGroupBox->setFont(myFont);
+
 	m_profileComboBox = new QComboBox(this);
+	//Make sure the longest profile fits in the comboBox
+	QFontMetrics fm(m_profileComboBox->font());
+	m_profileComboBox->setFixedWidth(fm.width(QString(MAX_PROFILE_NAME_LENGTH, 'W'))*1.10);
+
 	m_newProfileButton = new QPushButton("New...", this);
 	m_deleteProfileButton = new QPushButton("Delete...", this);
 

@@ -13,8 +13,9 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+
 	VoiceStick *w = new VoiceStick();
-    w->show();
+	w->show();
 
     return a.exec();
 }

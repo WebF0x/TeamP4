@@ -111,8 +111,6 @@ private:
     QString m_currentFileName;
     bool m_isModified = false;   //True if closing the program will lose unsaved changes
 	ModuleFPGA m_fpga;
-
-    static const int MAX_PROFILE_NAME_LENGTH = 30;
 };
 
 #endif // VOICESTICK_H

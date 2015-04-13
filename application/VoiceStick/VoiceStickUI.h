@@ -29,6 +29,7 @@
 #include <QStringList>
 #include <QCloseEvent>
 #include <QVector>
+#include <qbitmap.h>
 
 class VoiceStickUI : public QMainWindow
 {
@@ -86,6 +87,9 @@ private:
 	void createMid();
 	void createBot();
 	void comingSoonInfoPopup();
+
+protected:
+	static const int MAX_PROFILE_NAME_LENGTH = 30;
 	
 public:
     VoiceStickUI(QWidget *parent = 0);

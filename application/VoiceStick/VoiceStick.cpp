@@ -91,8 +91,9 @@ void VoiceStick::newProfile()
         &notCancelled);
 
     if(notCancelled)
-    {
-        title = title.trimmed(); //Remove whitespaces from the start and the end
+	{
+        title = title.trimmed();	//Remove whitespaces from the start and the end
+		title.replace('\n', "");	//Remove line breaks from title
 
         if(title.isEmpty())
         {
