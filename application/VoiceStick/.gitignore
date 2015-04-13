@@ -4,3 +4,4 @@ release
 *.sdf
 *.vcxproj*
 *.opensdf
+*.suo
