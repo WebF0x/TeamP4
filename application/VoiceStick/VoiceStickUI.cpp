@@ -15,7 +15,7 @@
 
 VoiceStickUI::VoiceStickUI(QWidget *parent) : QMainWindow(parent)
 {
-	phonemNames = new QStringList({ "a (fat)", "i (free)", "u (bed)", "whistle" });
+	phonemNames = new QStringList({ "a (fat)", "i (free)", "u (boot)", "whistle" });
 	myIcon.addFile("logo.jpg");
 
 	myFont.setPointSize(14);
